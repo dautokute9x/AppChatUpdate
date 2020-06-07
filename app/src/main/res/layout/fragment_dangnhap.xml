@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="?attr/backgroundcolor"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="30dp"
+                android:text="Wellcome,"
+                android:textColor="?attr/colorAccent"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:textSize="20dp"
+                android:text="sign in to continue"
+                android:layout_marginLeft="30dp"
+                android:textColor="?attr/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/login_email"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                app:errorEnabled="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:background="@drawable/edit_style"
+                    android:textColorHint="#ffffff"
+                    android:textColor="#ffffff"
+                    android:maxLines="1"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/login_password"
+                app:passwordToggleEnabled="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:errorEnabled="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:background="@drawable/edit_style"
+                    android:textColorHint="#ffffff"
+                    android:textColor="#ffffff"
+                    android:maxLines="1"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+           <TextView
+               android:layout_marginLeft="20dp"
+               android:layout_marginTop="5dp"
+               android:text="Forget Password ?"
+               android:id="@+id/forget_password_link"
+               android:textColor="?attr/textcolor"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"/>
+
+            <Button
+                android:text="Login"
+                android:textColor="#ffffff"
+                android:layout_marginTop="20dp"
+                android:id="@+id/login_button"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:background="@drawable/botron_button"
+                android:layout_width="170dp"
+                android:layout_height="50dp"/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:text="OR"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_gravity="center_horizontal"
+                android:background="#ffffff"
+                android:layout_width="250dp"
+                android:layout_height="1dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

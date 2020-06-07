@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="?attr/backgroundcolor"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TaiKhoanActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        app:titleTextColor="?attr/tabselectcolor"
+        android:background="?attr/backgroundcolor"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+    <ScrollView
+        android:layout_below="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                app:errorEnabled="true"
+                android:id="@+id/old_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:background="@drawable/edit_style"
+                    android:textColorHint="#ffffff"
+                    android:textColor="#ffffff"
+                    android:maxLines="1"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                app:errorEnabled="true"
+                android:id="@+id/new_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:background="@drawable/edit_style"
+                    android:textColorHint="#ffffff"
+                    android:textColor="#ffffff"
+                    android:maxLines="1"
+                    android:hint="New Email"
+                    android:inputType="textEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password"
+                app:passwordToggleEnabled="true"
+                app:errorEnabled="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:background="@drawable/edit_style"
+                    android:textColorHint="#ffffff"
+                    android:textColor="#ffffff"
+                    android:maxLines="1"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newPassword"
+                app:passwordToggleEnabled="true"
+                app:errorEnabled="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:background="@drawable/edit_style"
+                    android:textColorHint="#ffffff"
+                    android:textColor="#ffffff"
+                    android:maxLines="1"
+                    android:hint="New Password"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/colorAccent"
+                android:id="@+id/changeEmail"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Thay đổi"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:backgroundTint="@color/colorAccent"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/changePass"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Thay đổi"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:backgroundTint="@color/colorAccent"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/send"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Send"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone" />
+
+            <Button
+                android:backgroundTint="@color/colorAccent"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/remove"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Remove"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+            <Button
+                android:background="@drawable/botron_button"
+                android:id="@+id/change_email_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Đổi email"
+                android:textStyle="bold" />
+
+            <Button
+                android:background="@drawable/botron_button"
+                android:id="@+id/change_password_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Đổi mật khẩu"
+                android:textStyle="bold" />
+
+            <Button
+                android:background="@drawable/botron_button"
+                android:id="@+id/sending_pass_reset_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="send_password_reset_email"
+                android:textStyle="bold" />
+
+            <Button
+                android:background="@drawable/botron_button"
+                android:id="@+id/remove_user_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Xóa người dùng"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/sign_out"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimary"
+                android:text="Đăng xuất"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

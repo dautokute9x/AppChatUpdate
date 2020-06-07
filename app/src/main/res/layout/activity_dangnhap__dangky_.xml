@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="?attr/backgroundcolor"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Dangnhap_Dangky_Activity">
+    <com.google.android.material.tabs.TabLayout
+
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/myTabLayout"
+        app:tabIndicatorColor="?attr/tabselectcolor"
+        app:tabMode="fixed"
+        app:tabTextColor="?attr/tabtextcolor"
+        app:tabSelectedTextColor="?attr/tabselectcolor"
+        app:tabIndicatorHeight="2dp"
+        android:background="@android:color/transparent"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/myViewPager"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+</LinearLayout>

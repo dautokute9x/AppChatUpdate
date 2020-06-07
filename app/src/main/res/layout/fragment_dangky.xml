@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="?attr/backgroundcolor"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="Wellcome,"
+                android:textColor="?attr/colorAccent"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:textSize="20dp"
+                android:text="sign up to continue"
+                android:layout_marginLeft="30dp"
+                android:textColor="?attr/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                    <RadioButton
+                        android:textColor="?attr/tintcolor"
+                        android:textSize="20sp"
+                        android:text="Nam"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="8dp"
+                        android:id="@+id/male_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <RadioButton
+                        android:textColor="?attr/tintcolor"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Nữ"
+                        android:id="@+id/female_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/edit_style"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_style"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_style"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/edit_style"
+                    android:hint="Name"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/edit_style"
+                    android:hint="Phone"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/register_button"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/botron_button"
+                android:text="Register"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

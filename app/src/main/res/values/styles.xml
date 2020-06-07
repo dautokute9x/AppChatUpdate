@@ -1,0 +1,54 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="homeAsUpIndicator">@drawable/back_light_mode</item>
+        <item name="colorPrimary">#2196F3</item>
+        <item name="colorPrimaryDark">#1976D2</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundcolor">#F5F5F5</item>
+        <item name="cardbackground">#ffffff</item>
+        <item name="textcolor">#808080</item>
+        <item name="tintcolor">#000000</item>
+        <item name="buttoncolor">#2196f3</item>
+        <item name="tabcolor">#ffffff</item>
+        <item name="tabtextcolor">#808080</item>
+        <item name="tabselectcolor">#000000</item>
+        <item name="icon_chat">@drawable/chat_light_mode</item>
+        <item name="icon_contact">@drawable/contacts_light_mode</item>
+        <item name="icon_group">@drawable/group_light_mode</item>
+        <item name="icon_setting">@drawable/settings_light_mode</item>
+        <item name="icon_request">@drawable/notification_light_mode</item>
+        <item name="icon_search">@drawable/search_light_mode</item>
+        <item name="icon_create">@drawable/create_light_mode</item>
+        <item name="icon_add">@drawable/add_light_mode</item>
+    </style>
+
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="homeAsUpIndicator">@drawable/back_dark_mode</item>
+        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundcolor">#303030</item>
+        <item name="cardbackground">#424242</item>
+        <item name="textcolor">#ffffff</item>
+        <item name="tintcolor">#ffffff</item>
+        <item name="buttoncolor">#2196f3</item>
+        <item name="tabcolor">#000000</item>
+        <item name="tabtextcolor">#808080</item>
+        <item name="tabselectcolor">#ffffff</item>
+        <item name="icon_chat">@drawable/chat_night_mode</item>
+        <item name="icon_contact">@drawable/contacts_dark_mode</item>
+        <item name="icon_group">@drawable/group_dark_mode</item>
+        <item name="icon_setting">@drawable/settings_dark_mode</item>
+        <item name="icon_request">@drawable/notification_dark_mode</item>
+        <item name="icon_search">@drawable/search_dark_mode</item>
+        <item name="icon_create">@drawable/create_dark_mode</item>
+        <item name="icon_add">@drawable/add_dark_mode</item>
+    </style>
+
+    <style name="AlertDialog" parent="Theme.AppCompat.DayNight.Dialog"/>
+
+</resources>

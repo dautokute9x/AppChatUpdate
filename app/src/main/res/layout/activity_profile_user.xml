@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:backgroundTint="?attr/backgroundcolor"
+    android:background="#ffffff"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileUserActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                app:titleTextColor="?attr/tabselectcolor"
+                android:id="@+id/toolBar"
+                android:background="?attr/cardbackground"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/user_profile"
+                android:layout_gravity="center_horizontal"
+                app:civ_border_width="2dp"
+                android:layout_marginTop="45dp"
+                app:civ_border_color="@color/colorPrimary"/>
+            <EditText
+                android:id="@+id/set_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:hint="Username"
+                android:textAlignment="center"
+                android:textSize="22dp"
+                android:textColorHint="?attr/textcolor"
+                android:textColor="?attr/textcolor"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="6dp"
+                android:layout_marginTop="10dp"
+                />
+            <EditText
+                android:id="@+id/set_profile_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:hint="Bạn đang nghĩ gì"
+                android:textColorHint="?attr/textcolor"
+                android:textAlignment="center"
+                android:textColor="?attr/textcolor"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="6dp"
+                android:layout_marginTop="10dp"
+                />
+            <Button
+                android:id="@+id/update_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:textAlignment="center"
+                android:textColor="?attr/textcolor"
+                android:text="UPDATE"
+                android:background="@drawable/botron_button"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="6dp"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
