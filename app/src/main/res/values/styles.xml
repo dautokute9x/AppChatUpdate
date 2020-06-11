@@ -14,7 +14,7 @@
         <item name="buttoncolor">#2196f3</item>
         <item name="tabcolor">#00bcb3</item>
         <item name="tabtextcolor">#424242</item>
-        <item name="tabselectcolor">#00bcb3</item>
+        <item name="tabselectcolor">#2cb9b0</item>
         <item name="icon_search">@drawable/search_dark_mode</item>
         <item name="icon_create">@drawable/create_light_mode</item>
         <item name="icon_add">@drawable/add_light_mode</item>
