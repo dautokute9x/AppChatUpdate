@@ -1,73 +1,64 @@
 package com.example.chatappdemo;
 
 public class User {
-    private String email_signup;
-    private String password_signup;
-    private String gioitinh_signup;
-    private String name_signup;
-    private String phone_signup;
-    private String image;
+    private String imgAnhBia, imgAnhDD, name, status, gioiTinh, phone;
 
-    public  User(){}
-    public User(String email, String password) {
-        this.email_signup = email;
-        this.password_signup =password;
+    public User() {}
+
+    public User(String imgAnhBia, String imgAnhDD, String name, String status, String gioiTinh, String phone) {
+        this.imgAnhBia = imgAnhBia;
+        this.imgAnhDD = imgAnhDD;
+        this.name = name;
+        this.status = status;
+        this.gioiTinh = gioiTinh;
+        this.phone = phone;
     }
 
-    public User(String email, String password, String gioitinh, String name, String phone, String image) {
-        this.email_signup = email;
-        this.password_signup = password;
-        this.gioitinh_signup = gioitinh;
-        this.name_signup = name;
-        this.phone_signup = phone;
-        this.image = image;
+    public String getImgAnhBia() {
+        return imgAnhBia;
     }
 
-    public String getEmail_signup() {
-        return email_signup;
+    public void setImgAnhBia(String imgAnhBia) {
+        this.imgAnhBia = imgAnhBia;
     }
 
-    public void setEmail_signup(String email_signup) {
-        this.email_signup = email_signup;
+    public String getImgAnhDD() {
+        return imgAnhDD;
     }
 
-    public String getPassword_signup() {
-        return password_signup;
+    public void setImgAnhDD(String imgAnhDD) {
+        this.imgAnhDD = imgAnhDD;
     }
 
-    public void setPassword_signup(String password_signup) {
-        this.password_signup = password_signup;
+    public String getName() {
+        return name;
     }
 
-    public String getGioitinh_signup() {
-        return gioitinh_signup;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setGioitinh_signup(String gioitinh_signup) {
-        this.gioitinh_signup = gioitinh_signup;
+    public String getStatus() {
+        return status;
     }
 
-    public String getName_signup() {
-        return name_signup;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setName_signup(String name_signup) {
-        this.name_signup = name_signup;
+    public String getGioiTinh() {
+        return gioiTinh;
     }
 
-    public String getPhone_signup() {
-        return phone_signup;
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
-    public void setPhone_signup(String phone_signup) {
-        this.phone_signup = phone_signup;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

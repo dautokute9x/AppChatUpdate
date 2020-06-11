@@ -4,13 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 
 public class Dangnhap_Dangky_Activity extends AppCompatActivity {
-    public TabLayout tabLayout;
-    public ViewPager viewPager;
+    private Button btnSignin, btnSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,18 +23,23 @@ public class Dangnhap_Dangky_Activity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangnhap__dangky_);
-        tabLayout = findViewById(R.id.myTabLayout);
-        viewPager = findViewById(R.id.myViewPager);
-        init();
-    }
 
-    private void init() {
-        Dangnhap_Dangky_ViewPager_Adapter dangnhap_dangky_viewPager_adapter = new Dangnhap_Dangky_ViewPager_Adapter(getSupportFragmentManager());
-        dangnhap_dangky_viewPager_adapter.addFragment(new Fragment_Dangnhap(), "Sign In");
-        dangnhap_dangky_viewPager_adapter.addFragment(new Fragment_Dangky(), "Sign Up");
-        viewPager.setAdapter(dangnhap_dangky_viewPager_adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setText("Sign In");
-        tabLayout.getTabAt(1).setText("Sign Up");
+        btnSignin = findViewById(R.id.btnSignin);
+        btnSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent1 = new Intent(Dangnhap_Dangky_Activity.this, SigninActivity.class);
+               startActivity(intent1);
+            }
+        });
+
+        btnSignup = findViewById(R.id.btnSignup);
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(Dangnhap_Dangky_Activity.this, SignupActivity.class);
+                startActivity(intent2);
+            }
+        });
     }
 }

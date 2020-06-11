@@ -2,21 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_chat"
-        android:icon="?attr/icon_chat"
+        android:icon="@drawable/chat_night_mode"
+        android:iconTint="?attr/tabtextcolor"
         android:title="Chats"/>
 
     <item
         android:id="@+id/navigation_contact"
-        android:icon="?attr/icon_contact"
+        android:iconTint="?attr/tabtextcolor"
+        android:icon="@drawable/contacts_dark_mode"
         android:title="Contacts"/>
 
     <item
         android:id="@+id/navigation_group"
-        android:icon="?attr/icon_group"
+        android:iconTint="?attr/tabtextcolor"
+        android:icon="@drawable/group_dark_mode"
         android:title="Groups"/>
 
     <item
         android:id="@+id/navigation_request"
-        android:icon="?attr/icon_request"
+        android:iconTint="?attr/tabtextcolor"
+        android:icon="@drawable/notification_dark_mode"
         android:title="Requests"/>
 </menu>

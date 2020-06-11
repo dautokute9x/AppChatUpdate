@@ -42,7 +42,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Quên mật khẩu");
+        getSupportActionBar().setTitle("");
 
         inputEmail =  findViewById(R.id.email);
         btnReset =  findViewById(R.id.btn_reset_password);

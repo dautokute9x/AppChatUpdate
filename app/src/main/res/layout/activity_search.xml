@@ -10,7 +10,7 @@
     tools:context=".SearchActivity">
 
     <LinearLayout
-        android:background="?attr/backgroundcolor"
+        android:background="?attr/tabcolor"
         android:layout_margin="8dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"

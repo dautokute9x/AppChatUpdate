@@ -8,23 +8,46 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Dangnhap_Dangky_Activity">
-    <com.google.android.material.tabs.TabLayout
-
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_height="?attr/actionBarSize"
-        android:id="@+id/myTabLayout"
-        app:tabIndicatorColor="?attr/tabselectcolor"
-        app:tabMode="fixed"
-        app:tabTextColor="?attr/tabtextcolor"
-        app:tabSelectedTextColor="?attr/tabselectcolor"
-        app:tabIndicatorHeight="2dp"
-        android:background="@android:color/transparent"/>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/myViewPager"
+    <ImageView
         android:layout_weight="1"
+        android:layout_margin="8dp"
+        android:src="@drawable/logo"
+        android:layout_gravity="center"
+        android:layout_width="250dp"
+        android:layout_height="300dp"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="?attr/tintcolor"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="Welcome to Me Chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="LOGIN"
+        android:id="@+id/btnSignin"
+        android:layout_marginTop="16dp"
+        android:textColor="?attr/backgroundcolor"
+        android:background="@drawable/botron_button2"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="REGISTER"
+        android:id="@+id/btnSignup"
+        android:textColor="?attr/backgroundcolor"
+        android:background="@drawable/botron_button"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

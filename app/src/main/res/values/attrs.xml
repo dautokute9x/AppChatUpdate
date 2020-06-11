@@ -9,14 +9,11 @@
         <attr name="tabcolor" format="color"/>
         <attr name="tabtextcolor" format="color"/>
         <attr name="tabselectcolor" format="color"/>
-        <attr name="icon_chat" format="reference"/>
-        <attr name="icon_contact" format="reference"/>
-        <attr name="icon_group" format="reference"/>
-        <attr name="icon_setting" format="reference"/>
-        <attr name="icon_request" format="reference"/>
         <attr name="icon_search" format="reference"/>
         <attr name="icon_create" format="reference"/>
         <attr name="icon_add" format="reference"/>
+        <attr name="icon_email" format="reference"/>
+        <attr name="icon_pass" format="reference"/>
     </declare-styleable>
 
 </resources>

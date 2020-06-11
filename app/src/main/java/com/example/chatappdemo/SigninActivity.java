@@ -1,55 +1,61 @@
 package com.example.chatappdemo;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Pattern;
 
-public class Fragment_Dangnhap extends Fragment {
+public class SigninActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
 
     private Button login_Button;
-    private TextInputLayout login_Email, login_Password;
-    TextView login_forgetPassword;
+   private TextInputLayout login_Email, login_Password;
+    private TextView login_forgetPassword;
+    private Toolbar toolBarSignin;
     private ProgressDialog loadingBar;
     public String email_signin, password_signin;
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$");
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dangnhap, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signin);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        loadingBar = new ProgressDialog(getActivity());
+        loadingBar = new ProgressDialog(this);
 
-        login_Button = view.findViewById(R.id.login_button);
-        login_Email = view.findViewById(R.id.login_email);
-        login_Password = view.findViewById(R.id.login_password);
-        login_forgetPassword = view.findViewById(R.id.forget_password_link);
+        login_Button = findViewById(R.id.login_button);
+        login_Email = findViewById(R.id.login_email);
+        login_Password = findViewById(R.id.login_password);
+        login_forgetPassword = findViewById(R.id.forget_password_link);
+        toolBarSignin = findViewById(R.id.toolBarSignin);
+        setSupportActionBar(toolBarSignin);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
+
 
         login_Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,14 +76,16 @@ public class Fragment_Dangnhap extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(getActivity(), "Đăng nhập thành công...",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SigninActivity.this, "Đăng nhập thành công...",Toast.LENGTH_LONG).show();
                                         loadingBar.dismiss();
-                                        Intent intent_main = new Intent(getActivity(), MainActivity.class);
-                                        startActivity(intent_main);
+                                        Intent intent1 = new Intent(SigninActivity.this, MainActivity.class);
+                                        intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent1);
+                                        finish();
                                     }
                                     else {
                                         String message = task.getException().toString();
-                                        Toast.makeText(getActivity(), "Lỗi: " + message, Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SigninActivity.this, "Lỗi: " + message, Toast.LENGTH_LONG).show();
                                         loadingBar.dismiss();
                                     }
                                 }
@@ -89,11 +97,10 @@ public class Fragment_Dangnhap extends Fragment {
         login_forgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_forget = new Intent(getActivity(), ResetPasswordActivity.class);
+                Intent intent_forget = new Intent(SigninActivity.this, ResetPasswordActivity.class);
                 startActivity(intent_forget);
             }
         });
-        return view;
     }
 
     private boolean validateEmail() {

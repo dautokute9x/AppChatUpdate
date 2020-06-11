@@ -9,81 +9,151 @@
     android:layout_height="match_parent"
     tools:context=".ProfileUserActivity">
 
-    <ScrollView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBarUpdateProfile"
+        android:background="?attr/tabcolor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="?attr/actionBarSize">
         <LinearLayout
-            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.Toolbar
-                app:titleTextColor="?attr/tabselectcolor"
-                android:id="@+id/toolBar"
-                android:background="?attr/cardbackground"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"/>
+            <TextView
+                android:text="Update Profile"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="?attr/textcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginRight="16dp"
+                android:text="Cancel"
+                android:textStyle="bold"
+                android:id="@+id/tv_Done"
+                android:textColor="?attr/textcolor"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_below="@+id/toolBarUpdateProfile"
+        android:layout_marginBottom="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioGroup
+                android:layout_below="@+id/profile_image"
+                android:id="@+id/radio_group"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:textColor="?attr/tintcolor"
+                    android:textSize="20sp"
+                    android:text="Nam"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:id="@+id/male_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:textColor="?attr/tintcolor"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Nữ"
+                    android:id="@+id/female_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="20dp"
+                android:id="@+id/set_user_name"
+                android:layout_below="@+id/radio_group"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="outline"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_centerHorizontal="true"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/edit_style"
+                    android:textStyle="bold"
+                    android:hint="Username"
+                    android:inputType="textMultiLine"
+                    android:maxLines="1"
+                    android:textColorHint="?attr/tintcolor"
+                    android:textColor="?attr/tintcolor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/set_user_name"
+                android:id="@+id/set_profile_status"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="outline"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_centerHorizontal="true"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/edit_style"
+                    android:hint="Thêm lời giới thiệu"
+                    android:inputType="textMultiLine"
+                    android:maxLines="1"
+                    android:textColorHint="?attr/tintcolor"
+                    android:textColor="?attr/tintcolor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/set_profile_status"
+                android:id="@+id/set_profile_phone"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="outline"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_centerHorizontal="true"
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/edit_style"
+                    android:hint="Phone"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:textColorHint="?attr/tintcolor"
+                    android:textColor="?attr/tintcolor" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:src="@drawable/user_profile"
-                android:layout_gravity="center_horizontal"
-                app:civ_border_width="2dp"
-                android:layout_marginTop="45dp"
-                app:civ_border_color="@color/colorPrimary"/>
-            <EditText
-                android:id="@+id/set_user_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:hint="Username"
-                android:textAlignment="center"
-                android:textSize="22dp"
-                android:textColorHint="?attr/textcolor"
-                android:textColor="?attr/textcolor"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:padding="6dp"
-                android:layout_marginTop="10dp"
-                />
-            <EditText
-                android:id="@+id/set_profile_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:hint="Bạn đang nghĩ gì"
-                android:textColorHint="?attr/textcolor"
-                android:textAlignment="center"
-                android:textColor="?attr/textcolor"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:padding="6dp"
-                android:layout_marginTop="10dp"
-                />
-            <Button
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/redo"
                 android:id="@+id/update_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:textAlignment="center"
-                android:textColor="?attr/textcolor"
-                android:text="UPDATE"
-                android:background="@drawable/botron_button"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:padding="6dp"
-                android:layout_marginTop="10dp"
-                android:textAllCaps="false"
-                android:textSize="20sp"
-                />
-        </LinearLayout>
+                android:layout_below="@+id/set_profile_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
 
     </ScrollView>
 

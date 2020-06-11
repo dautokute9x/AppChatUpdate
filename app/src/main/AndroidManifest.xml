@@ -13,14 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".SeclecImageActivity"></activity>
+        <activity
+            android:name=".SignupActivity"
+            android:parentActivityName=".Dangnhap_Dangky_Activity" />
+        <activity
+            android:name=".SigninActivity"
+            android:parentActivityName=".Dangnhap_Dangky_Activity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".GroupChatActivity" />
         <activity
             android:name=".TaiKhoanActivity"
             android:parentActivityName=".SettingActivity" />
         <activity
             android:name=".ResetPasswordActivity"
-            android:parentActivityName=".Dangnhap_Dangky_Activity" />
+            android:parentActivityName=".SigninActivity" />
         <activity
             android:name=".SettingActivity"
             android:parentActivityName=".MainActivity" />

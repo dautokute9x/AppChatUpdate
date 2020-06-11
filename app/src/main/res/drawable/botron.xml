@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Set màu nền-->
     <solid
-        android:color="?attr/cardbackground" >
+        android:color="?attr/backgroundcolor" >
     </solid>
 
     <!-- đặt thuộc tính màu và độ rộng của đường viền -->

@@ -54,10 +54,10 @@ public class ProfileActivity extends AppCompatActivity {
         userRef.child(receiverUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("image"))) {
-                    String userImage = dataSnapshot.child("image").getValue().toString();
-                    String userName = dataSnapshot.child("name_signup").getValue().toString();
-                    String userSex = dataSnapshot.child("gioitinh_signup").getValue().toString();
+                if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("imgAnhDD"))) {
+                    String userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
+                    String userName = dataSnapshot.child("name").getValue().toString();
+                    String userSex = dataSnapshot.child("gioiTinh").getValue().toString();
 
                     Picasso.with(ProfileActivity.this).load(userImage).placeholder(R.drawable.user_profile).into(userProfileImage);
                     userProfileName.setText(userName);
@@ -65,8 +65,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                     ManageRequests();
                 } else {
-                    String userName = dataSnapshot.child("name_signup").getValue().toString();
-                    String userSex = dataSnapshot.child("gioitinh_signup").getValue().toString();
+                    String userName = dataSnapshot.child("name").getValue().toString();
+                    String userSex = dataSnapshot.child("gioiTinh").getValue().toString();
 
                     userProfileName.setText(userName);
                     userProfileSex.setText(userSex);

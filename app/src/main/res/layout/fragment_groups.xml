@@ -3,13 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/tabcolor"
+    android:background="?attr/cardbackground"
     tools:context=".GroupsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="?attr/backgroundcolor"
+        android:background="?attr/cardbackground"
         android:id="@+id/recyclerGroup"
-        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

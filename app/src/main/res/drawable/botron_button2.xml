@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Set màu nền-->
     <solid
-        android:color="#7BE87F" >
+        android:color="#00BCD4" >
     </solid>
 
     <!-- đặt thuộc tính màu và độ rộng của đường viền -->

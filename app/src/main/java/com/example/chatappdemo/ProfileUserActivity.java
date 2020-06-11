@@ -1,54 +1,37 @@
 package com.example.chatappdemo;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileUserActivity extends AppCompatActivity {
-    private Button updateAccount;
-    private EditText userName, userStatus;
-    private CircleImageView userProfileImage;
-    private Toolbar toolbar;
-
+    private RadioGroup radioGroup;
+    private RadioButton radioButtonOption;
+    private TextInputLayout set_user_name, set_profile_status, set_profile_phone;
+    private CircleImageView update_button;
+    private String edtUserName, edtStatus, edtPhone, gioitinh, currentUserId;
     private FirebaseAuth firebaseAuth;
-    private String currentUserID;
     private DatabaseReference databaseReference;
-    private static final int GalleryPick = 1;
-    private StorageReference UserStorageReference;
-    private ProgressDialog progressDialog;
-
+    private static final Pattern PHONE_PATTERN = Pattern.compile("(09|01[2|6|8|9])+([0-9]{8})\\b");
 
 
     @Override
@@ -61,172 +44,117 @@ public class ProfileUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_user);
         firebaseAuth = FirebaseAuth.getInstance();
-        UserStorageReference = FirebaseStorage.getInstance().getReference().child("Profile Images");
-        currentUserID = firebaseAuth.getCurrentUser().getUid();
+        currentUserId = firebaseAuth.getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        Anhxa();
-        updateAccount = findViewById(R.id.update_button);
+        AnhXa();
+    }
 
-        updateAccount.setOnClickListener(new View.OnClickListener() {
+    private void AnhXa() {
+        radioGroup = findViewById(R.id.radio_group);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                UpdateProfile();
-
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioButtonOption = radioGroup.findViewById(checkedId);
+                switch (checkedId) {
+                    case R.id.male_checkbox:
+                        gioitinh = radioButtonOption.getText().toString();
+                        break;
+                    case R.id.female_checkbox:
+                        gioitinh = radioButtonOption.getText().toString();
+                        break;
+                    default:
+                }
             }
         });
-        UserInfor();
-
-    //open thu vien anh
-        userProfileImage.setOnClickListener(new View.OnClickListener() {
+        set_user_name = findViewById(R.id.set_user_name);
+        set_profile_status = findViewById(R.id.set_profile_status);
+        set_profile_phone = findViewById(R.id.set_profile_phone);
+        update_button = findViewById(R.id.update_button);
+        update_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent galleryIntent = new Intent();
-                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-                galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent, GalleryPick);
-
+                UpdateProfileUser();
+                set_user_name.getEditText().setText("");
+                set_profile_status.getEditText().setText("");
+                set_profile_phone.getEditText().setText("");
             }
         });
-
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // crop image
-        if (requestCode == GalleryPick && resultCode == RESULT_OK && data != null) {
-            Uri imageUri = data.getData();
-            CropImage.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1, 1)
-                    .start(this);
-        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
-        {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK){
-
-                progressDialog.setTitle("Thêm ảnh cá nhân");
-                progressDialog.setMessage("Chờ một chút...");
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
-                Uri resultUri = result.getUri();
-               // add image into profile
-                final  StorageReference storageReference = UserStorageReference.child(currentUserID + ".jpg");
-                storageReference
-                        .putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(ProfileUserActivity.this,"Tải ảnh thành công",Toast.LENGTH_SHORT).show();
-
-                            final String downloadedUrl = task.getResult().getDownloadUrl().toString();
-                            databaseReference.child("Users").child(currentUserID).child("image")
-                                    .setValue(downloadedUrl)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                Toast.makeText(ProfileUserActivity.this,"Lưu ảnh thành công",Toast.LENGTH_SHORT).show();
-                                                    progressDialog.dismiss();
-                                                Picasso.with(ProfileUserActivity.this).load(downloadedUrl).into(userProfileImage);
-                                            }
-                                            else {
-                                                String message = task.getException().toString();
-                                                Toast.makeText(ProfileUserActivity.this,"Error: "+message,Toast.LENGTH_SHORT).show();
-                                                progressDialog.dismiss();
-                                            }
-
-                                        }
-                                    });
-                        }
-                        else {
-                            String message = task.getException().toString();
-                            Toast.makeText(ProfileUserActivity.this,"Error: "+message,Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
-                        }
-                    }
-                });
-            }
-
-        }
-
-    }
-
-
-    private void UserInfor() {
-        databaseReference.child("Users").child(currentUserID)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name_signup") && (dataSnapshot.hasChild("image")))) {
-                            String retrieveUserName = dataSnapshot.child("name_signup").getValue().toString();
-                            //String retrieveStatus = dataSnapshot.child("status").getValue().toString();
-                            String retrieveImage = dataSnapshot.child("image").getValue().toString();
-
-
-                            userName.setText(retrieveUserName);
-                            //userStatus.setText(retrieveStatus);
-                            Picasso.with(ProfileUserActivity.this).load(retrieveImage).into(userProfileImage);
-
-                        } else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name_signup"))) {
-                            String retrieveUserName = dataSnapshot.child("name_signup").getValue().toString();
-                            //String retrieveStatus = dataSnapshot.child("status").getValue().toString();
-
-                            userName.setText(retrieveUserName);
-                            //userStatus.setText(retrieveStatus);
-
-
-                        } else {
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-    }
-
-    private void UpdateProfile() {
-        String setUserName = userName.getText().toString();
-        String setStatus = userStatus.getText().toString();
-        if (TextUtils.isEmpty(setUserName)) {
-            Toast.makeText(ProfileUserActivity.this, "Hãy điền tên của bạn...", Toast.LENGTH_SHORT).show();
-        }
-        if (TextUtils.isEmpty(setStatus)) {
-            Toast.makeText(ProfileUserActivity.this, "Hãy điền trạng thái của bạn...", Toast.LENGTH_SHORT).show();
+    private void UpdateProfileUser() {
+        edtUserName = set_user_name.getEditText().getText().toString();
+        edtStatus = set_profile_status.getEditText().getText().toString();
+        edtPhone = set_profile_phone.getEditText().getText().toString().trim();
+        if (!validateName() | !validateStatus() | !validatePhone() | !validateSex()) {
+            return;
         } else {
+
             HashMap<String, String> profileMap = new HashMap<>();
-            profileMap.put("uid", currentUserID);
-            profileMap.put("name", setUserName);
-            profileMap.put("status", setStatus);
-            databaseReference.child("Users").child(currentUserID).setValue(profileMap)
+            profileMap.put("uid", currentUserId);
+            profileMap.put("name", edtUserName);
+            profileMap.put("status", edtStatus);
+            profileMap.put("phone", edtPhone);
+            profileMap.put("gioiTinh", gioitinh);
+
+            databaseReference.child("Users").child(currentUserId).setValue(profileMap)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(ProfileUserActivity.this, "Cập nhật thông tin thành công!", Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(ProfileUserActivity.this, "Update succelfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ProfileUserActivity.this, SeclecImageActivity.class);
+                                startActivity(intent);
                             } else {
                                 String message = task.getException().toString();
-                                Toast.makeText(ProfileUserActivity.this, "Lỗi: " + message, Toast.LENGTH_LONG).show();
+                                Toast.makeText(ProfileUserActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
         }
     }
 
-    private void Anhxa() {
-        userName = findViewById(R.id.set_user_name);
-        userStatus = findViewById(R.id.set_profile_status);
-        userProfileImage =(CircleImageView) findViewById(R.id.profile_image);
-        toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-        Context context;
-        progressDialog = new ProgressDialog(this);;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Thông tin hồ sơ");
+    private boolean validateName() {
+        edtUserName = set_user_name.getEditText().getText().toString().trim();
+        if (edtUserName.isEmpty()) {
+            set_user_name.setError("Hay dien ten ban muon hien thi!");
+            return false;
+        } else {
+            set_user_name.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateStatus() {
+        edtStatus = set_profile_status.getEditText().getText().toString().trim();
+        if (edtStatus.isEmpty()) {
+            set_profile_status.setError("Hay them loi gioi thieu ve ban!");
+            return false;
+        } else {
+            set_profile_status.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePhone() {
+        edtPhone = set_profile_phone.getEditText().getText().toString().trim();
+        if (edtPhone.isEmpty()) {
+            set_profile_phone.setError("Bạn không được để trống!");
+            return false;
+        } else if (!PHONE_PATTERN.matcher(edtPhone).matches()) {
+            set_profile_phone.setError("Vui lòng nhập đúng định dạng số điện thoại!");
+            return false;
+        } else {
+            set_profile_phone.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateSex() {
+        int isSelecter = radioGroup.getCheckedRadioButtonId();
+        if (isSelecter == -1) {
+            Toast.makeText(this, "Bạn chưa chọn giới tính!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }

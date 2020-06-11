@@ -20,13 +20,15 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class TaiKhoanActivity extends AppCompatActivity {
     private Toolbar toolbar;
-    private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
-            changeEmail, changePassword, sendEmail, remove, signOut;
+    private Button btnChangeEmail, btnChangePassword;
+    private CircleImageView changeEmail, changePassword;
     private TextInputLayout oldEmail, newEmail, password, newPassword;
     private ProgressBar progressBar;
-    private FirebaseAuth.AuthStateListener authStateListener;
+    //private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseAuth firebaseAuth;
     String emailOld, emailNew, passOld, passNew;
 
@@ -42,29 +44,14 @@ public class TaiKhoanActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Tài khoản");
+        getSupportActionBar().setTitle("");
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    startActivity(new Intent(TaiKhoanActivity.this, Dangnhap_Dangky_Activity.class));
-                    finish();
-                }
-            }
-        };
 
         btnChangeEmail = (Button) findViewById(R.id.change_email_button);
         btnChangePassword = (Button) findViewById(R.id.change_password_button);
-        btnSendResetEmail = (Button) findViewById(R.id.sending_pass_reset_button);
-        btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
-        changeEmail = (Button) findViewById(R.id.changeEmail);
-        changePassword = (Button) findViewById(R.id.changePass);
-        sendEmail = (Button) findViewById(R.id.send);
-        remove = (Button) findViewById(R.id.remove);
-        signOut = (Button) findViewById(R.id.sign_out);
+        changeEmail = findViewById(R.id.changeEmail);
+        changePassword = findViewById(R.id.changePass);
 
         oldEmail =  findViewById(R.id.old_email);
         newEmail =  findViewById(R.id.new_email);
@@ -79,8 +66,6 @@ public class TaiKhoanActivity extends AppCompatActivity {
         newPassword.setVisibility(View.GONE);
         changeEmail.setVisibility(View.GONE);
         changePassword.setVisibility(View.GONE);
-        sendEmail.setVisibility(View.GONE);
-        remove.setVisibility(View.GONE);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         if (progressBar != null) {
@@ -96,8 +81,6 @@ public class TaiKhoanActivity extends AppCompatActivity {
                 newPassword.setVisibility(View.GONE);
                 changeEmail.setVisibility(View.VISIBLE);
                 changePassword.setVisibility(View.GONE);
-                sendEmail.setVisibility(View.GONE);
-                remove.setVisibility(View.GONE);
             }
         });
 
@@ -136,8 +119,6 @@ public class TaiKhoanActivity extends AppCompatActivity {
                 newPassword.setVisibility(View.VISIBLE);
                 changeEmail.setVisibility(View.GONE);
                 changePassword.setVisibility(View.VISIBLE);
-                sendEmail.setVisibility(View.GONE);
-                remove.setVisibility(View.GONE);
             }
         });
 
@@ -172,99 +153,9 @@ public class TaiKhoanActivity extends AppCompatActivity {
             }
         });
 
-        btnSendResetEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                oldEmail.setVisibility(View.VISIBLE);
-                newEmail.setVisibility(View.GONE);
-                password.setVisibility(View.GONE);
-                newPassword.setVisibility(View.GONE);
-                changeEmail.setVisibility(View.GONE);
-                changePassword.setVisibility(View.GONE);
-                sendEmail.setVisibility(View.VISIBLE);
-                remove.setVisibility(View.GONE);
-            }
-        });
-
-        sendEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                if (!oldEmail.getEditText().getText().toString().trim().equals("")) {
-                    firebaseAuth.sendPasswordResetEmail(oldEmail.getEditText().getText().toString().trim())
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(TaiKhoanActivity.this, "Reset password email is sent!", Toast.LENGTH_SHORT).show();
-                                        progressBar.setVisibility(View.GONE);
-                                    } else {
-                                        Toast.makeText(TaiKhoanActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
-                                        progressBar.setVisibility(View.GONE);
-                                    }
-                                }
-                            });
-                } else {
-                    oldEmail.setError("Enter email");
-                    progressBar.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        btnRemoveUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                if (user != null) {
-                    user.delete()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(TaiKhoanActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(TaiKhoanActivity.this, Dangnhap_Dangky_Activity.class));
-                                        finish();
-                                        progressBar.setVisibility(View.GONE);
-                                    } else {
-                                        Toast.makeText(TaiKhoanActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
-                                        progressBar.setVisibility(View.GONE);
-                                    }
-                                }
-                            });
-                }
-            }
-        });
-
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
-
     }
 
     private void signOut() {
         firebaseAuth.signOut();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        firebaseAuth.addAuthStateListener(authStateListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (authStateListener != null) {
-            firebaseAuth.removeAuthStateListener(authStateListener);
-        }
     }
 }

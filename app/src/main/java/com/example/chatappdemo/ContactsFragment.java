@@ -70,16 +70,17 @@ public class ContactsFragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.hasChild("image")) {
-                                    String userImage = dataSnapshot.child("image").getValue().toString();
-                                    String userName = dataSnapshot.child("name_signup").getValue().toString();
-                                    String userSex = dataSnapshot.child("gioitinh_signup").getValue().toString();
+                                    String userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
+                                    String userName = dataSnapshot.child("name").getValue().toString();
+                                    String userSex = dataSnapshot.child("gioiTinh").getValue().toString();
 
                                     contactsViewHolder.tv_username.setText(userName);
                                     contactsViewHolder.tv_gioi_tinh.setText(userSex);
-                                    Picasso.with(getActivity()).load(userImage).placeholder(R.drawable.user_profile).into(contactsViewHolder.profileImage);
+                                    Picasso.with(getActivity()).load(userImage)
+                                            .placeholder(R.drawable.user_profile).into(contactsViewHolder.profileImage);
                                 } else {
-                                    String userName = dataSnapshot.child("name_signup").getValue().toString();
-                                    String userSex = dataSnapshot.child("gioitinh_signup").getValue().toString();
+                                    String userName = dataSnapshot.child("name").getValue().toString();
+                                    String userSex = dataSnapshot.child("gioiTinh").getValue().toString();
 
                                     contactsViewHolder.tv_username.setText(userName);
                                     contactsViewHolder.tv_gioi_tinh.setText(userSex);

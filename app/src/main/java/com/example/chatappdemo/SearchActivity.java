@@ -65,9 +65,9 @@ public class SearchActivity extends AppCompatActivity {
                 new FirebaseRecyclerAdapter<User, FindFriendViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull FindFriendViewHolder findFriendViewHolder,final int i, @NonNull User user) {
-                        findFriendViewHolder.tv_username.setText(user.getName_signup());
-                        findFriendViewHolder.tv_gioi_tinh.setText(user.getGioitinh_signup());
-                        Picasso.with(SearchActivity.this).load(user.getImage()).placeholder(R.drawable.user_profile).into(findFriendViewHolder.profileImage);
+                        findFriendViewHolder.tv_username.setText(user.getName());
+                        findFriendViewHolder.tv_gioi_tinh.setText(user.getGioiTinh());
+                        Picasso.with(SearchActivity.this).load(user.getImgAnhDD()).placeholder(R.drawable.user_profile).into(findFriendViewHolder.profileImage);
 
                         findFriendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override

@@ -10,10 +10,17 @@
     tools:context=".SettingActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
-        app:titleTextColor="?attr/tabselectcolor"
-        android:background="?attr/backgroundcolor"
+        android:background="?attr/tabcolor"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="?attr/actionBarSize">
+        <TextView
+            android:text="Setting"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="?attr/textcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
@@ -36,90 +43,122 @@
 
     <androidx.cardview.widget.CardView
         android:background="?attr/cardbackground"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
         android:layout_width="match_parent"
-        android:layout_height="30dp">
-
-        <Switch
-            android:layout_gravity="center_vertical"
-            android:drawableLeft="@drawable/sleep"
-            android:drawablePadding="10dp"
-            android:background="?attr/cardbackground"
-            android:id="@+id/switch_dark"
-            android:textSize="18dp"
-            android:text="Dark Light"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="?attr/textcolor"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+            android:layout_height="match_parent">
+
+            <Switch
+                android:layout_gravity="center_vertical"
+                android:drawableLeft="@drawable/sleep"
+                android:drawablePadding="10dp"
+                android:background="?attr/cardbackground"
+                android:id="@+id/switch_dark"
+                android:textSize="18dp"
+                android:text="Dark Light"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="?attr/tintcolor"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:id="@+id/txt_tt_taikhoan"
+                android:background="?attr/cardbackground"
+                android:text=" Update Profile"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/user_update"
+                android:drawableRight="@drawable/next"
+                android:drawablePadding="10dp"
+                android:textColor="?attr/tintcolor"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:id="@+id/txt_taikhoan_setting"
+                android:background="?attr/cardbackground"
+                android:text="Setting account"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/setting_profile"
+                android:drawableRight="@drawable/next"
+                android:drawablePadding="10dp"
+                android:textColor="?attr/tintcolor"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"/>
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:text="Account"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="8dp"
-        android:textColor="?attr/textcolor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
     <androidx.cardview.widget.CardView
         android:background="?attr/cardbackground"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/txt_tt_taikhoan"
-            android:background="?attr/cardbackground"
-            android:text="Profile"
-            android:textSize="18dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/user_setting"
-            android:drawableRight="@drawable/next"
-            android:drawablePadding="10dp"
-            android:textColor="?attr/textcolor"
-            android:textStyle="bold"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="35dp"/>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_Logout"
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:background="?attr/cardbackground"
+                android:text="Logout"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/caps_lock"
+                android:drawableRight="@drawable/next"
+                android:drawablePadding="10dp"
+                android:textColor="?attr/tintcolor"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"/>
+
+            <TextView
+                android:id="@+id/tv_DelAccout"
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:background="?attr/cardbackground"
+                android:text="Delete account"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/remove_user"
+                android:drawableRight="@drawable/next"
+                android:drawablePadding="10dp"
+                android:textColor="#F44336"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:background="?attr/cardbackground"
+                android:text="Information"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/info"
+                android:drawableRight="@drawable/next"
+                android:drawablePadding="10dp"
+                android:textColor="?attr/tintcolor"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"/>
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:background="?attr/cardbackground"
-        android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/txt_taikhoan_setting"
-            android:background="?attr/cardbackground"
-            android:text="Setting account"
-            android:textSize="18dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/setting_profile"
-            android:drawableRight="@drawable/next"
-            android:drawablePadding="10dp"
-            android:textColor="?attr/textcolor"
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"/>
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:text="Option"
-        android:layout_marginTop="5dp"
-        android:textSize="15dp"
-        android:layout_marginLeft="8dp"
-        android:textColor="?attr/textcolor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
 </LinearLayout>
