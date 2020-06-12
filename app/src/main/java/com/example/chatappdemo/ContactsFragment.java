@@ -72,18 +72,18 @@ public class ContactsFragment extends Fragment {
                                 if (dataSnapshot.hasChild("image")) {
                                     String userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
                                     String userName = dataSnapshot.child("name").getValue().toString();
-                                    String userSex = dataSnapshot.child("gioiTinh").getValue().toString();
+                                    String userStatus = dataSnapshot.child("status").getValue().toString();
 
                                     contactsViewHolder.tv_username.setText(userName);
-                                    contactsViewHolder.tv_gioi_tinh.setText(userSex);
+                                    contactsViewHolder.tv_status_item.setText(userStatus);
                                     Picasso.with(getActivity()).load(userImage)
                                             .placeholder(R.drawable.user_profile).into(contactsViewHolder.profileImage);
                                 } else {
                                     String userName = dataSnapshot.child("name").getValue().toString();
-                                    String userSex = dataSnapshot.child("gioiTinh").getValue().toString();
+                                    String userStatus = dataSnapshot.child("status").getValue().toString();
 
                                     contactsViewHolder.tv_username.setText(userName);
-                                    contactsViewHolder.tv_gioi_tinh.setText(userSex);
+                                    contactsViewHolder.tv_status_item.setText(userStatus);
                                 }
                             }
 
@@ -107,14 +107,14 @@ public class ContactsFragment extends Fragment {
     }
 
     public static class ContactsViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_username, tv_gioi_tinh;
+        TextView tv_username,tv_status_item;
         CircleImageView profileImage;
 
         public ContactsViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_username = itemView.findViewById(R.id.tv_user_name);
+            tv_status_item = itemView.findViewById(R.id.tv_status_item);
             profileImage = (CircleImageView) itemView.findViewById(R.id.user_profile);
-            tv_gioi_tinh = itemView.findViewById(R.id.tv_gioi_tinh);
         }
     }
 }

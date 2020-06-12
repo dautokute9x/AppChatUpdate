@@ -41,6 +41,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.cardview.widget.CardView
+        android:backgroundTint="?attr/cardbackground"
         android:background="?attr/cardbackground"
         android:layout_margin="16dp"
         android:layout_below="@+id/toolBarSelectImage"
@@ -90,6 +91,7 @@
             </FrameLayout>
 
             <LinearLayout
+                android:background="?attr/cardbackground"
                 android:layout_margin="16dp"
                 android:orientation="vertical"
                 android:layout_marginTop="20dp"

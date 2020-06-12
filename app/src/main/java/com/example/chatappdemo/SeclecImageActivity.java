@@ -56,6 +56,7 @@ public class SeclecImageActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference().child("Profile Images");
         databaseReference = FirebaseDatabase.getInstance().getReference();
         currentUserId = firebaseAuth.getCurrentUser().getUid();
+        DisplayProfile();
         AnhXa();
     }
 
@@ -117,7 +118,6 @@ public class SeclecImageActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        DisplayProfile();
         super.onActivityResult(requestCode, resultCode, data);
                 if (requestCode == GalleryPick && resultCode == RESULT_OK && data != null) {
                     Uri imgUri = data.getData();
@@ -150,6 +150,8 @@ public class SeclecImageActivity extends AppCompatActivity {
                                                     if (task.isSuccessful()) {
                                                         progressDialog.dismiss();
                                                         Toast.makeText(SeclecImageActivity.this, "Save image in database", Toast.LENGTH_SHORT).show();
+                                                        Intent intentSendMain = new Intent(SeclecImageActivity.this, MainActivity.class);
+                                                        startActivity(intentSendMain);
                                                     } else {
                                                         progressDialog.dismiss();
                                                         String message = task.getException().toString();

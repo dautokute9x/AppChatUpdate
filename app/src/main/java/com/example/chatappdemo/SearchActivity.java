@@ -66,7 +66,7 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull FindFriendViewHolder findFriendViewHolder,final int i, @NonNull User user) {
                         findFriendViewHolder.tv_username.setText(user.getName());
-                        findFriendViewHolder.tv_gioi_tinh.setText(user.getGioiTinh());
+                        findFriendViewHolder.tv_status_item.setText(user.getStatus());
                         Picasso.with(SearchActivity.this).load(user.getImgAnhDD()).placeholder(R.drawable.user_profile).into(findFriendViewHolder.profileImage);
 
                         findFriendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -93,15 +93,15 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public static class FindFriendViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_username, tv_gioi_tinh;
+        TextView tv_username, tv_status_item;
         CircleImageView profileImage;
-        ImageView img_On_Off;
+        CircleImageView img_On_Off;
         public FindFriendViewHolder(View itemView) {
             super(itemView);
             tv_username = itemView.findViewById(R.id.tv_user_name);
             profileImage = (CircleImageView) itemView.findViewById(R.id.user_profile);
-            img_On_Off = itemView.findViewById(R.id.user_on_off);
-            tv_gioi_tinh = itemView.findViewById(R.id.tv_gioi_tinh);
+            img_On_Off = (CircleImageView) itemView.findViewById(R.id.user_on_off);
+            tv_status_item = itemView.findViewById(R.id.tv_status_item);
         }
     }
 }

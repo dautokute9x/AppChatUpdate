@@ -23,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
     private String receiverUserID, curent_state, sender_userId;
     private CircleImageView userProfileImage;
-    private TextView userProfileName, userProfileSex;
+    private TextView userProfileName, userProfilePhone, userProfileStatus, userProfileSex;
     private Button btnSendMess, btnDeclineRequest;
     private DatabaseReference userRef, requestRef, contactRef;
     private FirebaseAuth firebaseAuth;
@@ -42,6 +42,8 @@ public class ProfileActivity extends AppCompatActivity {
         sender_userId = firebaseAuth.getCurrentUser().getUid();
         userProfileImage = findViewById(R.id.visit_profile_image);
         userProfileName = findViewById(R.id.visit_username);
+        userProfilePhone = findViewById(R.id.visit_phone);
+        userProfileStatus = findViewById(R.id.visit_status);
         userProfileSex = findViewById(R.id.visit_userGioitinh);
         btnSendMess = findViewById(R.id.btnSend_Mess);
         btnDeclineRequest = findViewById(R.id.btnDecline);
@@ -57,18 +59,26 @@ public class ProfileActivity extends AppCompatActivity {
                 if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("imgAnhDD"))) {
                     String userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
                     String userName = dataSnapshot.child("name").getValue().toString();
+                    String userPhone = dataSnapshot.child("phone").getValue().toString();
+                    String userStatus = dataSnapshot.child("status").getValue().toString();
                     String userSex = dataSnapshot.child("gioiTinh").getValue().toString();
 
                     Picasso.with(ProfileActivity.this).load(userImage).placeholder(R.drawable.user_profile).into(userProfileImage);
                     userProfileName.setText(userName);
+                    userProfilePhone.setText(userPhone);
+                    userProfileStatus.setText(userStatus);
                     userProfileSex.setText(userSex);
 
                     ManageRequests();
                 } else {
                     String userName = dataSnapshot.child("name").getValue().toString();
+                    String userPhone = dataSnapshot.child("phone").getValue().toString();
+                    String userStatus = dataSnapshot.child("status").getValue().toString();
                     String userSex = dataSnapshot.child("gioiTinh").getValue().toString();
 
                     userProfileName.setText(userName);
+                    userProfilePhone.setText(userPhone);
+                    userProfileStatus.setText(userStatus);
                     userProfileSex.setText(userSex);
 
                     ManageRequests();

@@ -7,55 +7,211 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="200dp"
-        android:id="@+id/visit_profile_image"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"
-        android:src="@drawable/user_profile"
-        android:layout_height="200dp"/>
-
-    <TextView
-        android:id="@+id/visit_username"
-        android:text="User name"
-        android:layout_below="@+id/visit_profile_image"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="bold"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBarSelectImage"
+        android:background="?attr/tabcolor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal" />
+        android:layout_height="?attr/actionBarSize">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginRight="16dp"
+                android:text="Cancel"
+                android:textStyle="bold"
+                android:id="@+id/tv_Back"
+                android:textColor="?attr/textcolor"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/visit_userGioitinh"
-        android:text="Gioi tinh"
-        android:layout_below="@+id/visit_username"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:textStyle="bold"
+            <TextView
+                android:layout_weight="2"
+                android:text="Add friend"
+                android:textSize="20sp"
+                android:gravity="left"
+                android:textColor="?attr/textcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:background="?attr/cardbackground"
+        android:layout_margin="16dp"
+        android:layout_below="@+id/toolBarSelectImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal" />
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:fitsSystemWindows="true"
+                android:id="@+id/imgBtnBG"
+                android:src="@drawable/teabackground"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
+            <FrameLayout
+                android:id="@+id/frame_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_below="@+id/toolBarSelectImage"
+                    android:id="@+id/visit_profile_image"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/user_profile"
+                    app:civ_border_width="2dp"
+                    android:layout_marginTop="120dp"
+                    app:civ_border_color="@color/colorPrimary"/>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:textColor="?attr/tintcolor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="UserName"
+                        />
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:textColor="?attr/tintcolor"
+                        android:id="@+id/visit_username"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mai Văn Thụ"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/darker_gray"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:textColor="?attr/tintcolor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone"
+                        />
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:textColor="?attr/tintcolor"
+                        android:id="@+id/visit_phone"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0367163963"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/darker_gray"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:textColor="?attr/tintcolor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status"
+                        />
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:textColor="?attr/tintcolor"
+                        android:id="@+id/visit_status"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/darker_gray"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:textColor="?attr/tintcolor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"
+                        />
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:textColor="?attr/tintcolor"
+                        android:id="@+id/visit_userGioitinh"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"/>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/btnSend_Mess"
-        android:layout_below="@+id/visit_userGioitinh"
+        android:layout_below="@+id/cardView"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
-        android:background="?attr/buttoncolor"
+        android:background="@drawable/botron_button2"
         android:textColor="?attr/backgroundcolor"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:text="Send Request"
+        android:text="Send request"
         android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -66,7 +222,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
-        android:background="?attr/buttoncolor"
+        android:background="@drawable/botron_button2"
         android:textColor="?attr/backgroundcolor"
         android:textStyle="bold"
         android:textSize="20sp"
