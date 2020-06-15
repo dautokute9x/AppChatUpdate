@@ -6,11 +6,11 @@
     android:background="?attr/cardbackground"
     tools:context=".ChatsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textColor="?attr/textcolor"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:id="@+id/request_list"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_height="match_parent"
-        android:text="fragment_request" />
-
+        android:layout_alignParentLeft="true" />
 </RelativeLayout>

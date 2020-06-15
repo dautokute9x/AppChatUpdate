@@ -1,5 +1,6 @@
 package com.example.chatappdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -69,21 +70,28 @@ public class ContactsFragment extends Fragment {
                         userRef.child(userIds).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.hasChild("image")) {
-                                    String userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
-                                    String userName = dataSnapshot.child("name").getValue().toString();
-                                    String userStatus = dataSnapshot.child("status").getValue().toString();
+                                if (dataSnapshot.exists()) {
+                                    if (dataSnapshot.hasChild("imgAnhDD")) {
+                                        String userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
+                                        Picasso.with(getContext()).load(userImage)
+                                                .placeholder(R.drawable.user_profile).into(contactsViewHolder.profileImage);
+                                    }
+                                    final String userName = dataSnapshot.child("name").getValue().toString();
+                                    final String userStatus = dataSnapshot.child("status").getValue().toString();
 
                                     contactsViewHolder.tv_username.setText(userName);
                                     contactsViewHolder.tv_status_item.setText(userStatus);
-                                    Picasso.with(getActivity()).load(userImage)
-                                            .placeholder(R.drawable.user_profile).into(contactsViewHolder.profileImage);
-                                } else {
-                                    String userName = dataSnapshot.child("name").getValue().toString();
-                                    String userStatus = dataSnapshot.child("status").getValue().toString();
 
-                                    contactsViewHolder.tv_username.setText(userName);
-                                    contactsViewHolder.tv_status_item.setText(userStatus);
+                                    contactsViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                            chatIntent.putExtra("visit_user_id", userName);
+                                            //chatIntent.putExtra("visit_user_image", retImage);
+                                            chatIntent.putExtra("visit_user_name", userStatus);
+                                            startActivity(chatIntent);
+                                        }
+                                    });
                                 }
                             }
 

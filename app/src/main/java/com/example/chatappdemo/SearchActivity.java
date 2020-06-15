@@ -44,8 +44,7 @@ public class SearchActivity extends AppCompatActivity {
         imgBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
         recycler_find_friend = findViewById(R.id.recycler_find_friend);

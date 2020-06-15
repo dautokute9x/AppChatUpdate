@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,7 +24,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
     private String receiverUserID, curent_state, sender_userId;
     private CircleImageView userProfileImage;
-    private TextView userProfileName, userProfilePhone, userProfileStatus, userProfileSex;
+    private ImageButton userProfileImageBG;
+    private TextView userProfileName, userProfilePhone, userProfileStatus, userProfileSex, tv_Back;
     private Button btnSendMess, btnDeclineRequest;
     private DatabaseReference userRef, requestRef, contactRef;
     private FirebaseAuth firebaseAuth;
@@ -41,10 +43,18 @@ public class ProfileActivity extends AppCompatActivity {
         receiverUserID = getIntent().getExtras().get("visit_userId").toString();
         sender_userId = firebaseAuth.getCurrentUser().getUid();
         userProfileImage = findViewById(R.id.visit_profile_image);
+        userProfileImageBG = findViewById(R.id.imgBtnBG);
         userProfileName = findViewById(R.id.visit_username);
         userProfilePhone = findViewById(R.id.visit_phone);
         userProfileStatus = findViewById(R.id.visit_status);
         userProfileSex = findViewById(R.id.visit_userGioitinh);
+        tv_Back = findViewById(R.id.tv_Back);
+        tv_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         btnSendMess = findViewById(R.id.btnSend_Mess);
         btnDeclineRequest = findViewById(R.id.btnDecline);
         curent_state = "new";
@@ -56,7 +66,11 @@ public class ProfileActivity extends AppCompatActivity {
         userRef.child(receiverUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("imgAnhDD"))) {
+                if ((dataSnapshot.exists()) && ((dataSnapshot.hasChild("imgAnhDD"))
+                        && (dataSnapshot.hasChild("name"))
+                        && (dataSnapshot.hasChild("status"))
+                        && (dataSnapshot.hasChild("gioiTinh"))
+                        && (dataSnapshot.hasChild("phone")))) {
                     String userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
                     String userName = dataSnapshot.child("name").getValue().toString();
                     String userPhone = dataSnapshot.child("phone").getValue().toString();
@@ -68,9 +82,8 @@ public class ProfileActivity extends AppCompatActivity {
                     userProfilePhone.setText(userPhone);
                     userProfileStatus.setText(userStatus);
                     userProfileSex.setText(userSex);
-
                     ManageRequests();
-                } else {
+                }
                     String userName = dataSnapshot.child("name").getValue().toString();
                     String userPhone = dataSnapshot.child("phone").getValue().toString();
                     String userStatus = dataSnapshot.child("status").getValue().toString();
@@ -82,7 +95,6 @@ public class ProfileActivity extends AppCompatActivity {
                     userProfileSex.setText(userSex);
 
                     ManageRequests();
-                }
             }
 
             @Override

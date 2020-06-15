@@ -79,9 +79,7 @@ public class SigninActivity extends AppCompatActivity {
                                         Toast.makeText(SigninActivity.this, "Đăng nhập thành công...",Toast.LENGTH_LONG).show();
                                         loadingBar.dismiss();
                                         Intent intent1 = new Intent(SigninActivity.this, MainActivity.class);
-                                        intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent1);
-                                        finish();
                                     }
                                     else {
                                         String message = task.getException().toString();

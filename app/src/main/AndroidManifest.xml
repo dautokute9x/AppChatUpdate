@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SeclecImageActivity"></activity>
+        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ViewProfileUserActivity" />
         <activity
             android:name=".SignupActivity"
             android:parentActivityName=".Dangnhap_Dangky_Activity" />
@@ -23,7 +24,7 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".GroupChatActivity" />
         <activity
-            android:name=".TaiKhoanActivity"
+            android:name=".UpdateAccoutActivity"
             android:parentActivityName=".SettingActivity" />
         <activity
             android:name=".ResetPasswordActivity"
@@ -33,7 +34,7 @@
             android:parentActivityName=".MainActivity" />
         <activity android:name=".SearchActivity" />
         <activity
-            android:name=".ProfileUserActivity"
+            android:name=".UpdateProfileUserActivity"
             android:parentActivityName=".SettingActivity" />
         <activity android:name=".Dangnhap_Dangky_Activity" />
         <activity android:name=".StartActivity">

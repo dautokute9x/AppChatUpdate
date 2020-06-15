@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileUserActivity">
+    tools:context=".UpdateProfileUserActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBarUpdateProfile"
@@ -43,17 +43,40 @@
 
     <ScrollView
         android:layout_below="@+id/toolBarUpdateProfile"
-        android:layout_marginBottom="40dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <FrameLayout
+                android:id="@+id/frame_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_below="@+id/toolBarSelectImage"
+                    android:id="@+id/imgBtnDD"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/user_profile"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/colorPrimary"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgBtnCamDD"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/camera"
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </FrameLayout>
+
             <RadioGroup
-                android:layout_below="@+id/profile_image"
+                android:layout_below="@+id/frame_layout"
                 android:id="@+id/radio_group"
                 android:orientation="horizontal"
                 android:layout_centerHorizontal="true"

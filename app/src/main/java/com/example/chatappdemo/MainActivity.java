@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    private String currentUserId;
 
 
 
@@ -120,21 +121,17 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if (currentUser == null) {
             Intent loginIntent = new Intent(MainActivity.this, Dangnhap_Dangky_Activity.class);
-            loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(loginIntent);
-            finish();
         } else {
-            String currentUserId = firebaseAuth.getCurrentUser().getUid();
+            currentUserId = firebaseAuth.getCurrentUser().getUid();
             databaseReference.child("Users").child(currentUserId).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if ((dataSnapshot.child("name").exists())) {
                         Toast.makeText(MainActivity.this,"Welcome",Toast.LENGTH_LONG).show();
                     } else {
-                        Intent intent = new Intent(MainActivity.this, ProfileUserActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        Intent intent = new Intent(MainActivity.this, UpdateProfileUserActivity.class);
                         startActivity(intent);
-                        finish();
                     }
                 }
 

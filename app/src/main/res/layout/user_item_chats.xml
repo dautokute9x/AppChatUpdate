@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<LinearLayout
+    android:orientation="horizontal"
     android:background="?attr/cardbackground"
     android:layout_margin="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:background="?attr/cardbackground"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_margin="5dp"
-                android:layout_width="80dp"
-                android:id="@+id/user_profile"
+                android:layout_width="65dp"
+                android:id="@+id/user_profile_chat"
                 android:src="@drawable/user_profile"
-                android:layout_height="80dp">
+                android:layout_height="65dp">
             </de.hdodenhof.circleimageview.CircleImageView>
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/user_on_off"
+                android:id="@+id/user_on_off_chat"
                 android:layout_gravity="right"
                 android:layout_marginTop="50dp"
                 android:visibility="invisible"
@@ -33,6 +28,7 @@
         </FrameLayout>
 
         <LinearLayout
+            android:layout_weight="2"
             android:layout_marginLeft="8dp"
             android:layout_gravity="center"
             android:background="?attr/cardbackground"
@@ -42,7 +38,7 @@
 
             <TextView
                 android:textColor="?attr/tintcolor"
-                android:id="@+id/tv_user_name"
+                android:id="@+id/tv_username_chat"
                 android:text="User name"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -51,44 +47,20 @@
 
             <TextView
                 android:textColor="?attr/tintcolor"
-                android:id="@+id/tv_status_item"
+                android:id="@+id/tv_status_chat"
                 android:text="Status"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/request_accept_btn"
-                    android:text="Accept"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/background_light"
-                    android:textAllCaps="false"
-                    android:background="@android:color/holo_green_light"
-                    android:visibility="invisible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"/>
-
-                <Button
-                    android:id="@+id/request_cancel_btn"
-                    android:text="Cancel"
-                    android:layout_marginLeft="16dp"
-                    android:visibility="invisible"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/background_light"
-                    android:textAllCaps="false"
-                    android:background="@android:color/holo_blue_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"/>
-
-            </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+    <TextView
+        android:text="time"
+        android:id="@+id/tv_time_chat"
+        android:textSize="15sp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SeclecImageActivity">
+    tools:context=".ViewProfileUserActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBarSelectImage"
@@ -51,29 +51,29 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageButton
-                android:fitsSystemWindows="true"
-                android:id="@+id/imgBtnBG"
-                android:src="@drawable/teabackground"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgBtnCamBG"
-                android:src="@drawable/camera"
-                android:layout_margin="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
             <FrameLayout
-                android:id="@+id/frame_layout"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
+                android:id="@+id/frame_layout_view_profile"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <ImageButton
+                    android:fitsSystemWindows="true"
+                    android:id="@+id/imgBtnBG"
+                    android:src="@drawable/teabackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgBtnCamBG"
+                    android:src="@drawable/camera"
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_below="@+id/toolBarSelectImage"
-                    android:id="@+id/imgBtnDD"
+                    android:id="@+id/imgBtnDD_ViewProfile"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:src="@drawable/user_profile"
@@ -81,13 +81,6 @@
                     android:layout_marginTop="120dp"
                     app:civ_border_color="@color/colorPrimary"/>
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgBtnCamDD"
-                    android:layout_gravity="bottom"
-                    android:src="@drawable/camera"
-                    android:layout_margin="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
             </FrameLayout>
 
             <LinearLayout
@@ -95,7 +88,7 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical"
                 android:layout_marginTop="20dp"
-                android:layout_below="@+id/frame_layout"
+                android:layout_below="@+id/frame_layout_view_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout

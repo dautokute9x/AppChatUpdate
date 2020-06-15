@@ -73,7 +73,7 @@ public class SettingActivity extends AppCompatActivity {
         userProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentNextSelect = new Intent(SettingActivity.this, SeclecImageActivity.class);
+                Intent intentNextSelect = new Intent(SettingActivity.this, ViewProfileUserActivity.class);
                 startActivity(intentNextSelect);
             }
         });
@@ -100,14 +100,14 @@ public class SettingActivity extends AppCompatActivity {
         txtTaiKhoanSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingActivity.this, TaiKhoanActivity.class));
+                startActivity(new Intent(SettingActivity.this, UpdateAccoutActivity.class));
             }
         });
         txtTaiKhoanProfile = findViewById(R.id.txt_tt_taikhoan);
         txtTaiKhoanProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingActivity.this, ProfileUserActivity.class));
+                startActivity(new Intent(SettingActivity.this, UpdateProfileUserActivity.class));
             }
         });
 
@@ -159,19 +159,15 @@ public class SettingActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name") && (dataSnapshot.hasChild("imgAnhDD")))) {
-                            String retrieveUserName = dataSnapshot.child("name").getValue().toString();
+                        if ((dataSnapshot.exists()) && (((dataSnapshot.hasChild("imgAnhDD")) && (dataSnapshot.hasChild("name"))))) {
                             String retrieveImage = dataSnapshot.child("imgAnhDD").getValue().toString();
+                            String retrieveUserName = dataSnapshot.child("name").getValue().toString();
 
                             user_Name.setText(retrieveUserName);
                             Picasso.with(SettingActivity.this).load(retrieveImage).into(userProfileImage);
-
-                        } else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name"))) {
+                        }
                             String retrieveUserName = dataSnapshot.child("name").getValue().toString();
                             user_Name.setText(retrieveUserName);
-                        } else {
-
-                        }
                     }
 
                     @Override
