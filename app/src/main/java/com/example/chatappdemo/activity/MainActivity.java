@@ -1,4 +1,4 @@
-package com.example.chatappdemo;
+package com.example.chatappdemo.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,12 +9,20 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chatappdemo.fragment.ChatsFragment;
+import com.example.chatappdemo.fragment.ContactsFragment;
+import com.example.chatappdemo.fragment.GroupsFragment;
+import com.example.chatappdemo.R;
+import com.example.chatappdemo.fragment.RequestFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,8 +31,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -32,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private CircleImageView profile_image;
     private ImageButton btnSearch;
     private TextView txtTitle;
+    private View notificationBadge;
 
     private FirebaseUser currentUser;
     private FirebaseAuth firebaseAuth;
@@ -52,15 +65,16 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         txtTitle = toolbar.findViewById(R.id.txt_Title);
-        txtTitle.setText("Me Chat");
+//        txtTitle.setText("Me Chat");
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        loadFragment(new ChatsFragment());
+        //loadFragment(new ChatsFragment());
         bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
+
         //Anh dai dien
         profile_image = findViewById(R.id.profile_image);
         profile_image.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +94,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent_search);
             }
         });
+
+        addBadgeView();
+    }
+
+    private void addBadgeView() {
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(0);
+
+        notificationBadge = LayoutInflater.from(this).inflate(R.layout.custom_badge_layout, menuView, false);
+
+        itemView.addView(notificationBadge);
     }
 
     private void loadFragment(Fragment fragment) {
@@ -98,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_chat:
                     fragment = new ChatsFragment();
                     loadFragment(fragment);
+                    refreshBadgeView();
                     return true;
                 case R.id.navigation_contact:
                     fragment = new ContactsFragment();
@@ -116,6 +142,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private void refreshBadgeView() {
+        boolean badgeIsVisible = notificationBadge.getVisibility() != VISIBLE;
+        notificationBadge.setVisibility(badgeIsVisible ? VISIBLE : GONE);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -129,6 +160,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if ((dataSnapshot.child("name").exists())) {
                         Toast.makeText(MainActivity.this,"Welcome",Toast.LENGTH_LONG).show();
+                        String userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
+                        String userName = dataSnapshot.child("name").getValue().toString();
+                        txtTitle.setText(userName);
+
+                        Picasso.with(MainActivity.this).load(userImage).into(profile_image);
                     } else {
                         Intent intent = new Intent(MainActivity.this, UpdateProfileUserActivity.class);
                         startActivity(intent);

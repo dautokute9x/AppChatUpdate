@@ -6,23 +6,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpdateAccoutActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
-        app:titleTextColor="?attr/tabselectcolor"
+    tools:context=".activity.UpdateAccoutActivity">
+    <LinearLayout
         android:background="?attr/tabcolor"
+        android:id="@+id/liner"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
-        <TextView
-            android:text="Update Accout"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textColor="?attr/textcolor"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/back_update_accout"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:background="?attr/tabcolor"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/back_dark_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:text="Update accout"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="?attr/textcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
     <ScrollView
-        android:layout_below="@+id/toolBar"
+        android:layout_below="@+id/liner"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

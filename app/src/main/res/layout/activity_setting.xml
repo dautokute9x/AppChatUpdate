@@ -7,20 +7,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
+    tools:context=".activity.SettingActivity">
+
+    <LinearLayout
         android:background="?attr/tabcolor"
+        android:id="@+id/liner"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/back_user_chat"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:background="?attr/tabcolor"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/back_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <TextView
             android:text="Setting"
             android:textSize="20sp"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:textColor="?attr/textcolor"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"

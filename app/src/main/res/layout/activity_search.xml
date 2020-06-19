@@ -7,38 +7,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".activity.SearchActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar_Search"
         android:background="?attr/tabcolor"
-        android:layout_margin="8dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
-        <ImageButton
-            android:id="@+id/imgBtnBack"
-            android:layout_marginLeft="8dp"
-            android:layout_gravity="center_vertical"
-            android:background="?attr/tabcolor"
-            android:src="?attr/homeAsUpIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
         <EditText
             android:hint="Tìm kiếm"
             android:textColorHint="?attr/textcolor"
             android:textColor="?attr/textcolor"
             android:paddingLeft="8dp"
-            android:layout_weight="2"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="12dp"
             android:drawablePadding="12dp"
             android:layout_gravity="center_vertical"
-            android:background="?attr/tabselectcolor"
-            android:layout_width="130dp"
-            android:layout_height="40dp"/>
+            android:background="@drawable/bg_input_search"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
 
-    </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

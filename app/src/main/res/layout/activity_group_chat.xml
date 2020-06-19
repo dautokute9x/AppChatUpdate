@@ -5,12 +5,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GroupChatActivity">
+    tools:context=".activity.GroupChatActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
+    <LinearLayout
+        android:background="?attr/tabcolor"
+        android:id="@+id/liner"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="?attr/actionBarSize">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/back_user_chat"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:background="?attr/tabcolor"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/back_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textColor="?attr/textcolor"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_below="@+id/toolBar"

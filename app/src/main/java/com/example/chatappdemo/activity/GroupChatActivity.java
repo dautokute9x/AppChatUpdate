@@ -1,4 +1,4 @@
-package com.example.chatappdemo;
+package com.example.chatappdemo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.example.chatappdemo.R;
 
 public class GroupChatActivity extends AppCompatActivity {
     private Toolbar toolbar;

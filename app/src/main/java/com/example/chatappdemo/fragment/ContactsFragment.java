@@ -1,4 +1,4 @@
-package com.example.chatappdemo;
+package com.example.chatappdemo.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.chatappdemo.R;
+import com.example.chatappdemo.activity.ChatActivity;
+import com.example.chatappdemo.model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +38,7 @@ public class ContactsFragment extends Fragment {
     private DatabaseReference contactsRef, userRef;
     private FirebaseAuth firebaseAuth;
     private String currentUserId;
+    private String userImage = "default_image";
 
     public ContactsFragment() {
         // Required empty public constructor
@@ -66,13 +70,13 @@ public class ContactsFragment extends Fragment {
                 new FirebaseRecyclerAdapter<User, ContactsViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull final ContactsViewHolder contactsViewHolder, int i, @NonNull User user) {
-                        String userIds = getRef(i).getKey();
+                        final String userIds = getRef(i).getKey();
                         userRef.child(userIds).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
                                     if (dataSnapshot.hasChild("imgAnhDD")) {
-                                        String userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
+                                        userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
                                         Picasso.with(getContext()).load(userImage)
                                                 .placeholder(R.drawable.user_profile).into(contactsViewHolder.profileImage);
                                     }
@@ -86,9 +90,9 @@ public class ContactsFragment extends Fragment {
                                         @Override
                                         public void onClick(View v) {
                                             Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-                                            chatIntent.putExtra("visit_user_id", userName);
-                                            //chatIntent.putExtra("visit_user_image", retImage);
-                                            chatIntent.putExtra("visit_user_name", userStatus);
+                                            chatIntent.putExtra("visit_user_id", userIds);
+                                            chatIntent.putExtra("visit_user_name", userName);
+                                            chatIntent.putExtra("visit_image", userImage);
                                             startActivity(chatIntent);
                                         }
                                     });

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Dangnhap_Dangky_Activity">
+    tools:context=".activity.Dangnhap_Dangky_Activity">
     <ImageView
         android:layout_weight="1"
         android:layout_margin="8dp"

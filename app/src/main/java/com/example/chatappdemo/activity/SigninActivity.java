@@ -1,4 +1,4 @@
-package com.example.chatappdemo;
+package com.example.chatappdemo.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chatappdemo.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -51,10 +52,6 @@ public class SigninActivity extends AppCompatActivity {
         login_Email = findViewById(R.id.login_email);
         login_Password = findViewById(R.id.login_password);
         login_forgetPassword = findViewById(R.id.forget_password_link);
-        toolBarSignin = findViewById(R.id.toolBarSignin);
-        setSupportActionBar(toolBarSignin);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
 
 
         login_Button.setOnClickListener(new View.OnClickListener() {

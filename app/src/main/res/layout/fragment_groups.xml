@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/cardbackground"
-    tools:context=".GroupsFragment">
+    tools:context=".fragment.GroupsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:background="?attr/cardbackground"

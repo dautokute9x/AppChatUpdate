@@ -1,8 +1,9 @@
-package com.example.chatappdemo;
+package com.example.chatappdemo.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,9 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.chatappdemo.R;
+import com.example.chatappdemo.model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,7 @@ public class SearchActivity extends AppCompatActivity {
     private ImageButton imgBtnBack;
     private RecyclerView recycler_find_friend;
     private DatabaseReference userRef;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +40,13 @@ public class SearchActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        toolbar = findViewById(R.id.toolBar_Search);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-        imgBtnBack = findViewById(R.id.imgBtnBack);
-        imgBtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         recycler_find_friend = findViewById(R.id.recycler_find_friend);
         recycler_find_friend.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -65,7 +65,6 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull FindFriendViewHolder findFriendViewHolder,final int i, @NonNull User user) {
                         findFriendViewHolder.tv_username.setText(user.getName());
-                        findFriendViewHolder.tv_status_item.setText(user.getStatus());
                         Picasso.with(SearchActivity.this).load(user.getImgAnhDD()).placeholder(R.drawable.user_profile).into(findFriendViewHolder.profileImage);
 
                         findFriendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +81,7 @@ public class SearchActivity extends AppCompatActivity {
                     @NonNull
                     @Override
                     public FindFriendViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item, parent, false);
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item_search, parent, false);
                         FindFriendViewHolder viewHolder = new FindFriendViewHolder(view);
                         return viewHolder;
                     }
@@ -92,7 +91,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public static class FindFriendViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_username, tv_status_item;
+        TextView tv_username;
         CircleImageView profileImage;
         CircleImageView img_On_Off;
         public FindFriendViewHolder(View itemView) {
@@ -100,7 +99,6 @@ public class SearchActivity extends AppCompatActivity {
             tv_username = itemView.findViewById(R.id.tv_user_name);
             profileImage = (CircleImageView) itemView.findViewById(R.id.user_profile);
             img_On_Off = (CircleImageView) itemView.findViewById(R.id.user_on_off);
-            tv_status_item = itemView.findViewById(R.id.tv_status_item);
         }
     }
 }

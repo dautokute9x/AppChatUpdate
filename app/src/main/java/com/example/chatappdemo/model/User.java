@@ -1,4 +1,4 @@
-package com.example.chatappdemo;
+package com.example.chatappdemo.model;
 
 import java.io.Serializable;
 

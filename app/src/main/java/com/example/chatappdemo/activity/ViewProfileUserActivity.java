@@ -1,4 +1,4 @@
-package com.example.chatappdemo;
+package com.example.chatappdemo.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,16 +7,12 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.chatappdemo.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,10 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,6 +34,7 @@ public class ViewProfileUserActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    private String ImageDD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +86,7 @@ public class ViewProfileUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentBackMain = new Intent(ViewProfileUserActivity.this, MainActivity.class);
+                intentBackMain.putExtra("imageDD", ImageDD);
                 startActivity(intentBackMain);
             }
         });
@@ -117,7 +112,7 @@ public class ViewProfileUserActivity extends AppCompatActivity {
                                 && (dataSnapshot.hasChild("status"))
                                 && (dataSnapshot.hasChild("gioiTinh"))
                                 && (dataSnapshot.hasChild("phone")))) {
-                            String ImageDD = dataSnapshot.child("imgAnhDD").getValue().toString();
+                            ImageDD = dataSnapshot.child("imgAnhDD").getValue().toString();
                             String UserName = dataSnapshot.child("name").getValue().toString();
                             String Status = dataSnapshot.child("status").getValue().toString();
                             String Phone = dataSnapshot.child("phone").getValue().toString();

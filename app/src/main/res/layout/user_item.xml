@@ -17,10 +17,10 @@
             android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_margin="5dp"
-                android:layout_width="80dp"
+                android:layout_width="65dp"
                 android:id="@+id/user_profile"
                 android:src="@drawable/user_profile"
-                android:layout_height="80dp">
+                android:layout_height="65dp">
             </de.hdodenhof.circleimageview.CircleImageView>
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_on_off"

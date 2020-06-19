@@ -1,4 +1,4 @@
-package com.example.chatappdemo;
+package com.example.chatappdemo.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.chatappdemo.R;
 
 import java.util.ArrayList;
 

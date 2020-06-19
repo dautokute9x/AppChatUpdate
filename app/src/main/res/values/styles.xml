@@ -5,16 +5,16 @@
         <!-- Customize your theme here. -->
         <item name="homeAsUpIndicator">@drawable/back_dark_mode</item>
         <item name="colorPrimary">#2cb9b0</item>
-        <item name="colorPrimaryDark">#1976D2</item>
+        <item name="colorPrimaryDark">#00bdb5</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundcolor">#f7f7f7</item>
         <item name="cardbackground">#ffffff</item>
         <item name="textcolor">#ffffff</item>
         <item name="tintcolor">#000000</item>
         <item name="buttoncolor">#2196f3</item>
-        <item name="tabcolor">#00bcb3</item>
+        <item name="tabcolor">#00bdb5</item>
         <item name="tabtextcolor">#424242</item>
-        <item name="tabselectcolor">#2cb9b0</item>
+        <item name="tabselectcolor">#00c7bf</item>
         <item name="icon_search">@drawable/search_dark_mode</item>
         <item name="icon_create">@drawable/create_light_mode</item>
         <item name="icon_add">@drawable/add_light_mode</item>
@@ -26,16 +26,16 @@
         <!-- Customize your theme here. -->
         <item name="homeAsUpIndicator">@drawable/back_dark_mode</item>
         <item name="colorPrimary">#2cb9b0</item>
-        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorPrimaryDark">#00bdb5</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundcolor">#403E3E</item>
         <item name="cardbackground">#424242</item>
         <item name="textcolor">#ffffff</item>
         <item name="tintcolor">#ffffff</item>
         <item name="buttoncolor">#2196f3</item>
-        <item name="tabcolor">#00bcb3</item>
+        <item name="tabcolor">#00bdb5</item>
         <item name="tabtextcolor">#424242</item>
-        <item name="tabselectcolor">#00bcb3</item>
+        <item name="tabselectcolor">#00c7bf</item>
         <item name="icon_search">@drawable/search_dark_mode</item>
         <item name="icon_create">@drawable/create_dark_mode</item>
         <item name="icon_add">@drawable/add_dark_mode</item>

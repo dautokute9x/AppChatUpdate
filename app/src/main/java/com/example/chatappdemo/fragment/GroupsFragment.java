@@ -1,4 +1,4 @@
-package com.example.chatappdemo;
+package com.example.chatappdemo.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,23 +14,17 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.chatappdemo.R;
+import com.example.chatappdemo.adapter.RecyclerViewAdapterGroup;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 
 /**

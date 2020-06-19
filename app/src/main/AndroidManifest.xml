@@ -13,38 +13,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatActivity"></activity>
-        <activity android:name=".ViewProfileUserActivity" />
+        <activity android:name=".activity.ChatActivity"></activity>
+        <activity android:name=".activity.ViewProfileUserActivity" />
         <activity
-            android:name=".SignupActivity"
-            android:parentActivityName=".Dangnhap_Dangky_Activity" />
+            android:name=".activity.SignupActivity"
+            android:parentActivityName=".activity.Dangnhap_Dangky_Activity" />
         <activity
-            android:name=".SigninActivity"
-            android:parentActivityName=".Dangnhap_Dangky_Activity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".GroupChatActivity" />
+            android:name=".activity.SigninActivity"
+            android:parentActivityName=".activity.Dangnhap_Dangky_Activity" />
+        <activity android:name=".activity.ProfileActivity" />
+        <activity android:name=".activity.GroupChatActivity" />
         <activity
-            android:name=".UpdateAccoutActivity"
-            android:parentActivityName=".SettingActivity" />
+            android:name=".activity.UpdateAccoutActivity"
+            android:parentActivityName=".activity.SettingActivity" />
         <activity
-            android:name=".ResetPasswordActivity"
-            android:parentActivityName=".SigninActivity" />
+            android:name=".activity.ResetPasswordActivity"
+            android:parentActivityName=".activity.SigninActivity" />
         <activity
-            android:name=".SettingActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".SearchActivity" />
+            android:name=".activity.SettingActivity"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.SearchActivity"
+            android:parentActivityName=".activity.MainActivity"/>
         <activity
-            android:name=".UpdateProfileUserActivity"
-            android:parentActivityName=".SettingActivity" />
-        <activity android:name=".Dangnhap_Dangky_Activity" />
-        <activity android:name=".StartActivity">
+            android:name=".activity.UpdateProfileUserActivity"
+            android:parentActivityName=".activity.SettingActivity" />
+        <activity android:name=".activity.Dangnhap_Dangky_Activity" />
+        <activity android:name=".activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

@@ -1,35 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:background="?attr/backgroundcolor"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity">
+    tools:context=".activity.ChatActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:background="?attr/tabcolor"
-        android:id="@+id/chat_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
         <LinearLayout
+            android:background="?attr/tabcolor"
+            android:id="@+id/liner"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="?attr/actionBarSize">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/back_user_chat"
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:background="?attr/tabcolor"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/back_dark_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/user_profile"
-                android:id="@+id/toolbar_image_user_chat"
+                android:id="@+id/image_user_chat"
                 android:layout_width="40dp"
                 android:layout_height="40dp"/>
-        </LinearLayout>
 
-    </androidx.appcompat.widget.Toolbar>
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:id="@+id/name_user_chat"
+                android:textColor="?attr/textcolor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messager_list_of_users"
-        android:layout_below="@+id/chat_toolbar"
+        android:layout_weight="2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -54,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true">
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgMore"
             android:layout_marginLeft="8dp"
             android:src="@drawable/add"
             android:layout_width="wrap_content"
@@ -62,14 +78,24 @@
             android:id="@+id/input_message"
             android:hint="Enter message"
             android:background="@drawable/bg_input_message"
+            android:drawableRight="@drawable/smile"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="8dp"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:maxLines="6"/>
+
+        <ImageButton
+            android:id="@+id/img_send_mess"
+            android:layout_marginRight="8dp"
+            android:background="?attr/backgroundcolor"
+            android:layout_gravity="center"
+            android:src="@drawable/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
