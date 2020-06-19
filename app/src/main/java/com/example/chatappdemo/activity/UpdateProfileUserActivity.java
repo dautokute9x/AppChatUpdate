@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chatappdemo.R;
@@ -38,6 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UpdateProfileUserActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
+    private TextView tv_Cancel;
     private RadioButton radioButtonOption;
     private TextInputLayout set_user_name, set_profile_status, set_profile_phone;
     private CircleImageView update_button, imgBtnDD, imgBtnCamDD;
@@ -59,6 +61,13 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile_user);
+        tv_Cancel = findViewById(R.id.tv_Cancel);
+        tv_Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         firebaseAuth = FirebaseAuth.getInstance();
         currentUserId = firebaseAuth.getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference();

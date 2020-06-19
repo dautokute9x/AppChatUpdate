@@ -62,10 +62,8 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-        txtTitle = toolbar.findViewById(R.id.txt_Title);
-//        txtTitle.setText("Me Chat");
+
+        txtTitle = findViewById(R.id.txt_Title);
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();

@@ -31,7 +31,7 @@
                 android:layout_marginRight="16dp"
                 android:text="Cancel"
                 android:textStyle="bold"
-                android:id="@+id/tv_Done"
+                android:id="@+id/tv_Cancel"
                 android:textColor="?attr/textcolor"
                 android:gravity="right"
                 android:layout_weight="1"

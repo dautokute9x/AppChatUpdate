@@ -37,7 +37,7 @@ public class SettingActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private String currentUserID;
     private DatabaseReference databaseReference;
-    private CircleImageView userProfileImage;
+    private CircleImageView userProfileImage, btn_Back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +48,14 @@ public class SettingActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+        btn_Back = findViewById(R.id.back_setting);
+        btn_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         progressDialog = new ProgressDialog(this);
 

@@ -14,6 +14,7 @@
         <attr name="icon_add" format="reference"/>
         <attr name="icon_email" format="reference"/>
         <attr name="icon_pass" format="reference"/>
+        <attr name="no_search_result" format="reference"/>
     </declare-styleable>
 
 </resources>

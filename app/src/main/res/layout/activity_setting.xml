@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/back_user_chat"
+            android:id="@+id/back_setting"
             android:layout_gravity="center"
             android:layout_marginLeft="12dp"
             android:background="?attr/tabcolor"

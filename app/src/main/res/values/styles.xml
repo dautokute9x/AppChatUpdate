@@ -20,6 +20,7 @@
         <item name="icon_add">@drawable/add_light_mode</item>
         <item name="icon_email">@drawable/email_light_mode</item>
         <item name="icon_pass">@drawable/lock_light_mode</item>
+        <item name="no_search_result">@drawable/no_search_light</item>
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -41,6 +42,7 @@
         <item name="icon_add">@drawable/add_dark_mode</item>
         <item name="icon_email">@drawable/email_dark_mode</item>
         <item name="icon_pass">@drawable/lock_dark_mode</item>
+        <item name="no_search_result">@drawable/no_search_dark</item>
     </style>
 
     <style name="AlertDialog" parent="Theme.AppCompat.DayNight.Dialog"/>

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.chatappdemo.R;
@@ -30,6 +31,7 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView recycler_find_friend;
     private DatabaseReference userRef;
     private Toolbar toolbar;
+    private ImageView imgNo_Search_Result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
+
+        imgNo_Search_Result = findViewById(R.id.img_no_search_result);
 
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 

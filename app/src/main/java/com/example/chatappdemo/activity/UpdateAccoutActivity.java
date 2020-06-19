@@ -23,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UpdateAccoutActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Button btnChangeEmail, btnChangePassword;
-    private CircleImageView changeEmail, changePassword;
+    private CircleImageView changeEmail, changePassword, btn_Back;
     private TextInputLayout oldEmail, newEmail, password, newPassword;
     private ProgressBar progressBar;
     //private FirebaseAuth.AuthStateListener authStateListener;
@@ -39,10 +39,14 @@ public class UpdateAccoutActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_accout);
-        toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+        btn_Back = findViewById(R.id.back_update_accout);
+        btn_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

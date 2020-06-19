@@ -30,6 +30,14 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <ImageView
+        android:id="@+id/img_no_search_result"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:src="?attr/no_search_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/recycler_find_friend"
