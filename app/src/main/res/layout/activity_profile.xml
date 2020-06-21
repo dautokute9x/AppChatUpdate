@@ -41,10 +41,12 @@
         </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
+        android:background="?attr/backgroundcolor"
         android:layout_below="@+id/toolBarSelectImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
+            android:background="?attr/backgroundcolor"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -56,6 +58,7 @@
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
+                    android:background="?attr/cardbackground"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <ImageButton
@@ -83,6 +86,7 @@
                     </FrameLayout>
 
                     <LinearLayout
+                        android:background="?attr/cardbackground"
                         android:layout_margin="16dp"
                         android:orientation="vertical"
                         android:layout_marginTop="20dp"
@@ -215,7 +219,7 @@
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="60dp"
                 android:background="@drawable/botron_button2"
-                android:textColor="?attr/backgroundcolor"
+                android:textColor="?attr/tintcolor"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:text="Send request"
@@ -230,7 +234,7 @@
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="60dp"
                 android:background="@drawable/botron_button2"
-                android:textColor="?attr/backgroundcolor"
+                android:textColor="?attr/tintcolor"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:text="Cancel Request"

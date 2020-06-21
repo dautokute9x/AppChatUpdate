@@ -1,9 +1,9 @@
 package com.example.chatappdemo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,15 +11,16 @@ import android.widget.Button;
 import com.example.chatappdemo.R;
 
 public class Dangnhap_Dangky_Activity extends AppCompatActivity {
+    int themeIdcurrent;
+    String SHARED_PREFS = "codeTheme";
     private Button btnSignin, btnSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
+        SharedPreferences locationpref = getApplicationContext()
+                .getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        themeIdcurrent = locationpref.getInt("themeid",R.style.AppTheme);
+        setTheme(themeIdcurrent);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangnhap__dangky_);
 

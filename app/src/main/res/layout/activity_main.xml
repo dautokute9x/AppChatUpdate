@@ -20,6 +20,8 @@
                 android:layout_gravity="center"
                 android:src="@drawable/user_profile"
                 android:layout_width="50dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/colorBackground"
                 android:layout_height="?attr/actionBarSize"/>
             <TextView
                 android:id="@+id/txt_Title"

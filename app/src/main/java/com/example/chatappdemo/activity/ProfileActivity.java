@@ -3,6 +3,7 @@ package com.example.chatappdemo.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,8 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
+    int themeIdcurrent;
+    String SHARED_PREFS = "codeTheme";
     private String receiverUserID, curent_state, sender_userId;
     private CircleImageView userProfileImage;
     private ImageButton userProfileImageBG;
@@ -33,6 +36,10 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences locationpref = getApplicationContext()
+                .getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        themeIdcurrent = locationpref.getInt("themeid",R.style.AppTheme);
+        setTheme(themeIdcurrent);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 

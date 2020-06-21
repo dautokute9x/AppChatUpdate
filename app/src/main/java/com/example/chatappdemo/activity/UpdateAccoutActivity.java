@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseUser;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UpdateAccoutActivity extends AppCompatActivity {
+    int themeIdcurrent;
+    String SHARED_PREFS = "codeTheme";
     private Toolbar toolbar;
     private Button btnChangeEmail, btnChangePassword;
     private CircleImageView changeEmail, changePassword, btn_Back;
@@ -32,11 +35,10 @@ public class UpdateAccoutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
+        SharedPreferences locationpref = getApplicationContext()
+                .getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        themeIdcurrent = locationpref.getInt("themeid",R.style.AppTheme);
+        setTheme(themeIdcurrent);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_accout);
         btn_Back = findViewById(R.id.back_update_accout);

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +39,8 @@ import java.util.regex.Pattern;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UpdateProfileUserActivity extends AppCompatActivity {
+    int themeIdcurrent;
+    String SHARED_PREFS = "codeTheme";
     private RadioGroup radioGroup;
     private TextView tv_Cancel;
     private RadioButton radioButtonOption;
@@ -54,11 +57,10 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
+        SharedPreferences locationpref = getApplicationContext()
+                .getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        themeIdcurrent = locationpref.getInt("themeid",R.style.AppTheme);
+        setTheme(themeIdcurrent);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile_user);
         tv_Cancel = findViewById(R.id.tv_Cancel);

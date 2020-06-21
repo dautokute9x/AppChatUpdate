@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/back_user_chat"
+            android:id="@+id/back_signin"
             android:layout_gravity="center"
             android:layout_marginLeft="12dp"
             android:background="?attr/tabcolor"
@@ -71,6 +71,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
+                android:textColorHint="?attr/tintcolor"
                 app:errorEnabled="true"
                 app:boxBackgroundMode="outline"
                 android:backgroundTint="@color/colorAccent"
@@ -95,6 +96,7 @@
                 app:passwordToggleEnabled="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
+                android:textColorHint="?attr/tintcolor"
                 android:layout_marginRight="20dp"
                 app:boxBackgroundMode="outline"
                 app:errorEnabled="true"

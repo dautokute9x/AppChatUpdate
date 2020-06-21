@@ -9,6 +9,7 @@
     tools:context=".activity.StartActivity">
 
     <ImageView
+        android:background="?attr/backgroundcolor"
         android:src="@drawable/logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

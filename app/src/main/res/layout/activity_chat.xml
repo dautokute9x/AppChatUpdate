@@ -45,6 +45,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messager_list_of_users"
         android:layout_weight="2"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -84,6 +86,7 @@
             android:layout_marginRight="8dp"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:textColor="?attr/tintcolor"
             android:layout_height="match_parent"
             android:maxLines="6"/>
 

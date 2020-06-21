@@ -59,23 +59,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:background="?attr/cardbackground"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Switch
-                android:layout_gravity="center_vertical"
-                android:drawableLeft="@drawable/sleep"
-                android:drawablePadding="10dp"
-                android:background="?attr/cardbackground"
-                android:id="@+id/switch_dark"
-                android:textSize="18dp"
-                android:text="Dark Light"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+            <TextView
+                android:text="Choose theme"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:textColor="?attr/tintcolor"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:background="?attr/cardbackground"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_light"
+                    android:layout_margin="8dp"
+                    android:id="@+id/btn_light"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+
+                <Button
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_dark"
+                    android:layout_margin="8dp"
+                    android:id="@+id/btn_dark"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+
+            </LinearLayout>
 
             <TextView
                 android:paddingRight="10dp"

@@ -1,16 +1,21 @@
 package com.example.chatappdemo.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 
+
+import android.app.AlarmManager;
+
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +34,9 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingActivity extends AppCompatActivity {
-    private Toolbar toolbar;
-    private Switch darkSwitch;
+    private Button btn_Light, btn_Dark;
+    int themeIdcurrent;
+    String SHARED_PREFS = "codeTheme";
     private TextView txtTaiKhoanSetting, txtTaiKhoanProfile, user_Name, tv_Logout, tv_DelAccout;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -41,13 +47,42 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
+        SharedPreferences locationpref = getApplicationContext()
+                .getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        themeIdcurrent = locationpref.getInt("themeid",R.style.AppTheme);
+        setTheme(themeIdcurrent);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        btn_Light = findViewById(R.id.btn_light);
+        btn_Light.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                themeIdcurrent = R.style.AppTheme;
+                SharedPreferences locationpref = getApplicationContext()
+                        .getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                SharedPreferences.Editor spedit = locationpref.edit();
+                spedit.putInt("themeid", themeIdcurrent);
+                spedit.apply();
+                restartApp();
+            }
+        });
+
+        btn_Dark = findViewById(R.id.btn_dark);
+        btn_Dark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                themeIdcurrent = R.style.DarkTheme;
+                SharedPreferences locationpref = getApplicationContext()
+                        .getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                SharedPreferences.Editor spedit = locationpref.edit();
+                spedit.putInt("themeid", themeIdcurrent);
+                spedit.apply();
+                restartApp();
+            }
+        });
+
         btn_Back = findViewById(R.id.back_setting);
         btn_Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +90,6 @@ public class SettingActivity extends AppCompatActivity {
                 finish();
             }
         });
-
 
         progressDialog = new ProgressDialog(this);
 
@@ -83,23 +117,6 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
         user_Name = findViewById(R.id.user_Name);
-
-        darkSwitch = findViewById(R.id.switch_dark);
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            darkSwitch.setChecked(true);
-        }
-        darkSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    restartApp();
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    restartApp();
-                }
-            }
-        });
 
         txtTaiKhoanSetting = findViewById(R.id.txt_taikhoan_setting);
         txtTaiKhoanSetting.setOnClickListener(new View.OnClickListener() {
@@ -153,9 +170,13 @@ public class SettingActivity extends AppCompatActivity {
         });
         UserInfor();
     }
+
     public void restartApp() {
-        Intent intent = new Intent(getApplicationContext(),SettingActivity.class);
-        startActivity(intent);
+        Intent i = getBaseContext().getPackageManager().
+                getLaunchIntentForPackage(getBaseContext().getPackageName());
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
         finish();
     }
 
