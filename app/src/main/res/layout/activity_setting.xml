@@ -98,6 +98,14 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@android:color/darker_gray"/>
+
             <TextView
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
@@ -112,6 +120,14 @@
                 android:textColor="?attr/tintcolor"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@android:color/darker_gray"/>
 
             <TextView
                 android:paddingRight="10dp"
@@ -138,6 +154,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:background="?attr/cardbackground"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -157,6 +174,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@android:color/darker_gray"/>
+
             <TextView
                 android:id="@+id/tv_DelAccout"
                 android:paddingRight="10dp"
@@ -171,6 +196,14 @@
                 android:textColor="#F44336"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@android:color/darker_gray"/>
 
             <TextView
                 android:paddingRight="10dp"
