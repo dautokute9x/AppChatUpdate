@@ -36,8 +36,17 @@
                 android:layout_marginLeft="5dp"
                 android:id="@+id/name_user_chat"
                 android:textColor="?attr/textcolor"
+                android:layout_weight="2"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageButton
+                android:background="?attr/tabcolor"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="center"
+                android:src="@drawable/video_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -76,28 +85,30 @@
             android:src="@drawable/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <EditText
-            android:id="@+id/input_message"
-            android:hint="Enter message"
-            android:background="@drawable/bg_input_message"
-            android:drawableRight="@drawable/smile"
-            android:layout_gravity="center"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textColor="?attr/tintcolor"
+        <FrameLayout
             android:layout_height="match_parent"
-            android:maxLines="6"/>
+            android:layout_width="0dp"
+            android:layout_weight="1">
+            <EditText
+                android:id="@+id/input_message"
+                android:hint="Enter message"
+                android:background="@drawable/bg_input_message"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:textColor="#000000"
+                android:layout_height="match_parent"
+                android:maxLines="6"/>
 
-        <ImageButton
-            android:id="@+id/img_send_mess"
-            android:layout_marginRight="8dp"
-            android:background="?attr/backgroundcolor"
-            android:layout_gravity="center"
-            android:src="@drawable/send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_smile"
+                android:layout_gravity="center|right"
+                android:paddingRight="16dp"
+                android:src="@drawable/smile"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
 
     </LinearLayout>
 

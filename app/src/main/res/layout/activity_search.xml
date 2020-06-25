@@ -9,34 +9,59 @@
     android:layout_height="match_parent"
     tools:context=".activity.SearchActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar_Search"
+    <LinearLayout
+        android:background="?attr/tabcolor"
+        android:id="@+id/liner"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/back_search"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:background="?attr/tabcolor"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/back_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Search"
+            android:textSize="23sp"
+            android:layout_gravity="center"
+            android:textColor="?attr/textcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
         android:background="?attr/tabcolor"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
-
         <EditText
-            android:hint="Tìm kiếm"
+            android:id="@+id/txt_search"
+            android:hint="Name"
+            android:drawableLeft="?attr/icon_search"
+            android:drawableRight="@drawable/close"
             android:textColorHint="?attr/textcolor"
             android:textColor="?attr/textcolor"
             android:paddingLeft="8dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginLeft="32dp"
             android:drawablePadding="12dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/bg_input_search"
             android:layout_width="match_parent"
             android:layout_height="30dp"/>
 
-    </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img_no_search_result"
-        android:visibility="gone"
-        android:layout_gravity="center"
-        android:src="?attr/no_search_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+<!--    <ImageView-->
+<!--        android:id="@+id/img_no_search_result"-->
+<!--        android:visibility="gone"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:src="?attr/no_search_result"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

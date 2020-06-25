@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -32,7 +34,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +47,7 @@ public class ChatActivity extends AppCompatActivity {
     int themeIdcurrent;
     String SHARED_PREFS = "codeTheme";
     private String messReceiverId, messReceiverImage, messReceiverName, messSenderId;
-    private CircleImageView imgMore, imgProfileFriend, back_user_chat;
+    private CircleImageView imgMore, imgProfileFriend, back_user_chat, imgSmile;
     private TextView name_user_chat, userLastSeen;
     private ImageButton btnSendMessage;
     private EditText messageInput;
@@ -53,6 +57,7 @@ public class ChatActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private RecyclerView userMessageList;
     private MessageAdapter messageAdapter;
+    private String saveCurrentTime, saveCurrentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,15 @@ public class ChatActivity extends AppCompatActivity {
         messReceiverId = getIntent().getExtras().get("visit_user_id").toString();
         messReceiverName = getIntent().getExtras().get("visit_user_name").toString();
         messReceiverImage = getIntent().getExtras().get("visit_image").toString();
+
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd MM, yyyy");
+        saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm");
+        saveCurrentTime = currentTime.format(calendar.getTime());
+
         Picasso.with(ChatActivity.this).load(messReceiverImage)
                 .placeholder(R.drawable.user_profile).into(imgProfileFriend);
         name_user_chat.setText(messReceiverName);
@@ -78,7 +92,34 @@ public class ChatActivity extends AppCompatActivity {
                 finish();
             }
         });
+        imgSmile = findViewById(R.id.img_smile);
         messageInput = findViewById(R.id.input_message);
+        messageInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (messageInput.getText().toString().equals("")) {
+                    imgSmile.setImageResource(R.drawable.smile);
+                } else {
+                    imgSmile.setImageResource(R.drawable.send);
+                    imgSmile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            sendMessage();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         linearLayoutManager = new LinearLayoutManager(this);
         userMessageList = (RecyclerView) findViewById(R.id.messager_list_of_users);
@@ -102,13 +143,13 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        btnSendMessage = findViewById(R.id.img_send_mess);
-        btnSendMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendMessage();
-            }
-        });
+//        btnSendMessage = findViewById(R.id.img_send_mess);
+//        btnSendMessage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sendMessage();
+//            }
+//        });
 
         userMessageList.setLayoutManager(linearLayoutManager);
         userMessageList.setAdapter(messageAdapter);
@@ -163,12 +204,18 @@ public class ChatActivity extends AppCompatActivity {
             DatabaseReference userMessageKeyRef = RootRef.child("Messages").child(messSenderId)
                     .child(messReceiverId).push();
             String messagePushID = userMessageKeyRef.getKey();
-            Map messageTextBody = new HashMap();
+            Map<String, String> messageTextBody = new HashMap<>();
             messageTextBody.put("message", messageText);
+            messageTextBody.put("to", messReceiverId);
             messageTextBody.put("type", "text");
             messageTextBody.put("from", messSenderId);
 
-            Map messageBodyDetails = new HashMap();
+            messageTextBody.put("messageID", messagePushID);
+            messageTextBody.put("time", saveCurrentTime);
+            messageTextBody.put("date", saveCurrentDate);
+
+
+            Map<String, Object> messageBodyDetails = new HashMap<>();
             messageBodyDetails.put(messageSendRef + "/" + messagePushID, messageTextBody);
             messageBodyDetails.put(messageRecvRef + "/" + messagePushID, messageTextBody);
             RootRef.updateChildren(messageBodyDetails).addOnCompleteListener(new OnCompleteListener() {
@@ -192,4 +239,5 @@ public class ChatActivity extends AppCompatActivity {
 
         }
     }
+
 }

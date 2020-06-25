@@ -42,12 +42,12 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
+        android:layout_margin="16dp"
         android:layout_below="@+id/toolBarUpdateProfile"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -68,7 +68,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgBtnCamDD"
-                    android:layout_gravity="bottom"
+                    android:layout_gravity="bottom|right"
                     android:src="@drawable/camera"
                     android:layout_margin="8dp"
                     android:layout_width="wrap_content"
@@ -83,9 +83,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <RadioButton
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/male"
                     android:textColor="?attr/tintcolor"
                     android:textSize="20sp"
-                    android:text="Nam"
+                    android:text="Male"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="8dp"
@@ -93,11 +95,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <RadioButton
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/female"
                     android:textColor="?attr/tintcolor"
                     android:textSize="20sp"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
-                    android:text="Nữ"
+                    android:text="Female"
                     android:id="@+id/female_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -105,10 +109,12 @@
             </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginTop="20dp"
                 android:id="@+id/set_user_name"
                 android:layout_below="@+id/radio_group"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundMode="outline"
                 android:backgroundTint="@color/colorAccent"
@@ -128,10 +134,12 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_below="@+id/set_user_name"
                 android:id="@+id/set_profile_status"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundMode="outline"
                 android:backgroundTint="@color/colorAccent"
@@ -148,11 +156,44 @@
                     android:textColor="?attr/tintcolor" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginTop="20dp"
+            <LinearLayout
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:id="@+id/linear_update_profile"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/set_profile_status"
-                android:id="@+id/set_profile_phone"
-                android:layout_width="250dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.hbb20.CountryCodePicker
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/ccp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardbackground"
+                    app:ccp_defaultNameCode="VN"/>
+
+                    <EditText
+                        android:id="@+id/set_profile_phone"
+                        android:hint="Phone number"
+                        android:textColor="?attr/tintcolor"
+                        android:inputType="phone"
+                        android:singleLine="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"/>
+
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:visibility="gone"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/linear_update_profile"
+                android:id="@+id/txtCode"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundMode="outline"
                 android:backgroundTint="@color/colorAccent"
@@ -162,20 +203,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:background="@drawable/edit_style"
-                    android:hint="Phone"
-                    android:inputType="phone"
+                    android:hint="Write you code here"
+                    android:inputType="number"
                     android:maxLines="1"
                     android:textColorHint="?attr/tintcolor"
                     android:textColor="?attr/tintcolor" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/redo"
                 android:id="@+id/update_button"
-                android:layout_below="@+id/set_profile_phone"
+                android:layout_below="@+id/txtCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_below="@+id/update_button"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="16dp" />
         </RelativeLayout>
 
     </ScrollView>

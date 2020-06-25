@@ -26,6 +26,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -58,9 +62,31 @@ public class ContactsFragment extends Fragment {
         return contactsView;
     }
 
+    private void updateUserStatus(String state) {
+        String saveCurrentTime, saveCurrentDate;
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd MM, yyyy");
+        saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm");
+        saveCurrentTime = currentTime.format(calendar.getTime());
+
+        HashMap<String, Object> onlineStatusMap = new HashMap<>();
+        onlineStatusMap.put("time", saveCurrentTime);
+        onlineStatusMap.put("date", saveCurrentDate);
+        onlineStatusMap.put("state", state);
+
+        currentUserId = firebaseAuth.getCurrentUser().getUid();
+        userRef.child("Users").child(currentUserId).child("userState")
+                .updateChildren(onlineStatusMap);
+
+    }
+
     @Override
     public void onStart() {
         super.onStart();
+        updateUserStatus("online");
         FirebaseRecyclerOptions options =
                 new FirebaseRecyclerOptions.Builder<User>()
                 .setQuery(contactsRef, User.class)
@@ -79,6 +105,23 @@ public class ContactsFragment extends Fragment {
                                         userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
                                         Picasso.with(getContext()).load(userImage)
                                                 .placeholder(R.drawable.user_profile).into(contactsViewHolder.profileImage);
+                                    } else if (dataSnapshot.child("userState").hasChild("state")){
+                                        String state = dataSnapshot.child("userState").child("state").getValue().toString();
+//                                        String date = dataSnapshot.child("userState").child("date").getValue().toString();
+//                                        String time = dataSnapshot.child("userState").child("time").getValue().toString();
+                                        if (state.equals("online")){
+                                            contactsViewHolder.onlineIcon.setVisibility(View.VISIBLE);
+//                                            contactsViewHolder.tv_status_item.setText("Online");
+
+                                        }else if (state.equals("offline")){
+                                            contactsViewHolder.onlineIcon.setVisibility(View.INVISIBLE);
+//                                            contactsViewHolder.tv_status_item.setText("Last seen: "  +time  +" "+ date);
+
+                                        }
+                                    }else {
+//                                        contactsViewHolder.tv_status_item.setText("offline");
+                                        contactsViewHolder.onlineIcon.setVisibility(View.INVISIBLE);
+
                                     }
                                     final String userName = dataSnapshot.child("name").getValue().toString();
                                     final String userStatus = dataSnapshot.child("status").getValue().toString();
@@ -118,15 +161,28 @@ public class ContactsFragment extends Fragment {
         adapter.startListening();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        updateUserStatus("offline");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        updateUserStatus("offline");
+    }
+
     public static class ContactsViewHolder extends RecyclerView.ViewHolder {
         TextView tv_username,tv_status_item;
-        CircleImageView profileImage;
+        CircleImageView profileImage, onlineIcon;
 
         public ContactsViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_username = itemView.findViewById(R.id.tv_user_name);
             tv_status_item = itemView.findViewById(R.id.tv_status_item);
-            profileImage = (CircleImageView) itemView.findViewById(R.id.user_profile);
+            profileImage =  itemView.findViewById(R.id.user_profile);
+            onlineIcon=  itemView.findViewById(R.id.user_on_off_chat);
         }
     }
 }

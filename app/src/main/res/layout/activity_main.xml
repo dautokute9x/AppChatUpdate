@@ -14,15 +14,29 @@
             android:background="?attr/tabcolor"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_margin="8dp"
-                android:id="@+id/profile_image"
-                android:layout_gravity="center"
-                android:src="@drawable/user_profile"
-                android:layout_width="50dp"
-                app:civ_border_width="2dp"
-                app:civ_border_color="@color/colorBackground"
-                android:layout_height="?attr/actionBarSize"/>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:id="@+id/profile_image"
+                    android:layout_gravity="center"
+                    android:src="@drawable/user_profile"
+                    android:layout_width="50dp"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/colorBackground"
+                    android:layout_height="?attr/actionBarSize"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_on_off_chat"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="visible"
+                    android:src="@drawable/online"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"/>
+            </FrameLayout>
             <TextView
                 android:id="@+id/txt_Title"
                 android:textColor="?attr/textcolor"

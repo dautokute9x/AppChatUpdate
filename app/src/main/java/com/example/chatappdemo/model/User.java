@@ -1,6 +1,5 @@
 package com.example.chatappdemo.model;
 
-import java.io.Serializable;
 
 public class User{
     private String imgAnhBia, imgAnhDD, name, status, gioiTinh, phone;

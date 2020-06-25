@@ -11,8 +11,12 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,14 +25,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hbb20.CountryCodePicker;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -44,7 +51,7 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private TextView tv_Cancel;
     private RadioButton radioButtonOption;
-    private TextInputLayout set_user_name, set_profile_status, set_profile_phone;
+    private TextInputLayout set_user_name, set_profile_status;
     private CircleImageView update_button, imgBtnDD, imgBtnCamDD;
     private String edtUserName, edtStatus, edtPhone, gioitinh, currentUserId;
     private FirebaseAuth firebaseAuth;
@@ -53,6 +60,9 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
     private static final Pattern PHONE_PATTERN = Pattern.compile("(09|01[2|6|8|9])+([0-9]{8})\\b");
+
+    private CountryCodePicker ccp;
+    private EditText set_profile_phone;
 
 
     @Override
@@ -112,6 +122,9 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
         set_user_name = findViewById(R.id.set_user_name);
         set_profile_status = findViewById(R.id.set_profile_status);
         set_profile_phone = findViewById(R.id.set_profile_phone);
+        ccp = findViewById(R.id.ccp);
+        ccp.registerCarrierNumberEditText(set_profile_phone);
+
         update_button = findViewById(R.id.update_button);
         update_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +132,7 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
                 UpdateProfileUser();
                 set_user_name.getEditText().setText("");
                 set_profile_status.getEditText().setText("");
-                set_profile_phone.getEditText().setText("");
+                set_profile_phone.setText("");
             }
         });
         DisplayProfile();
@@ -204,7 +217,7 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
     private void UpdateProfileUser() {
         edtUserName = set_user_name.getEditText().getText().toString();
         edtStatus = set_profile_status.getEditText().getText().toString();
-        edtPhone = set_profile_phone.getEditText().getText().toString().trim();
+        edtPhone = ccp.getFullNumberWithPlus().trim();
         if (!validateName() | !validateStatus() | !validatePhone() | !validateSex()) {
             return;
         } else {
@@ -256,13 +269,13 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
     }
 
     private boolean validatePhone() {
-        edtPhone = set_profile_phone.getEditText().getText().toString().trim();
+        edtPhone = ccp.getFullNumberWithPlus();
         if (edtPhone.isEmpty()) {
             set_profile_phone.setError("Bạn không được để trống!");
             return false;
-        } else if (!PHONE_PATTERN.matcher(edtPhone).matches()) {
-            set_profile_phone.setError("Vui lòng nhập đúng định dạng số điện thoại!");
-            return false;
+//        } else if (!PHONE_PATTERN.matcher(edtPhone).matches()) {
+//            set_profile_phone.setError("Vui lòng nhập đúng định dạng số điện thoại!");
+//            return false;
         } else {
             set_profile_phone.setError(null);
             return true;

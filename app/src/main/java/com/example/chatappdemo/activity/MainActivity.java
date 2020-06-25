@@ -32,6 +32,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.view.View.GONE;
@@ -95,6 +99,27 @@ public class MainActivity extends AppCompatActivity {
         addBadgeView();
     }
 
+    private void updateUserStatus(String state) {
+        String saveCurrentTime, saveCurrentDate;
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd MM, yyyy");
+        saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm");
+        saveCurrentTime = currentTime.format(calendar.getTime());
+
+        HashMap<String, Object> onlineStatusMap = new HashMap<>();
+        onlineStatusMap.put("time", saveCurrentTime);
+        onlineStatusMap.put("date", saveCurrentDate);
+        onlineStatusMap.put("state", state);
+
+        currentUserId = firebaseAuth.getCurrentUser().getUid();
+        databaseReference.child("Users").child(currentUserId).child("userState")
+                .updateChildren(onlineStatusMap);
+
+    }
+
     private void addBadgeView() {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
         BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(0);
@@ -151,12 +176,13 @@ public class MainActivity extends AppCompatActivity {
             Intent loginIntent = new Intent(MainActivity.this, Dangnhap_Dangky_Activity.class);
             startActivity(loginIntent);
         } else {
+            updateUserStatus("online");
             currentUserId = firebaseAuth.getCurrentUser().getUid();
             databaseReference.child("Users").child(currentUserId).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if ((dataSnapshot.child("name").exists())) {
-                        Toast.makeText(MainActivity.this,"Welcome",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_LONG).show();
                         String userImage = dataSnapshot.child("imgAnhDD").getValue().toString();
                         String userName = dataSnapshot.child("name").getValue().toString();
                         txtTitle.setText(userName);
@@ -175,5 +201,17 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        updateUserStatus("offline");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        updateUserStatus("offline");
     }
 }

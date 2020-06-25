@@ -2,11 +2,10 @@ package com.example.chatappdemo.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -19,8 +18,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.regex.Pattern;
 
@@ -39,6 +40,8 @@ public class SignupActivity extends AppCompatActivity {
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$");
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences locationpref = getApplicationContext()
@@ -55,8 +58,13 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
         loadingBar = new ProgressDialog(SignupActivity.this);
         register_button = findViewById(R.id.register_button);
         register_button.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +78,7 @@ public class SignupActivity extends AppCompatActivity {
         register_ConfirmPassword = findViewById(R.id.register_confirm_password);
     }
 
+
     public void registerUser(){
         email_signup = register_Email.getEditText().getText().toString();
         password_signup = register_Password.getEditText().getText().toString();
@@ -78,8 +87,8 @@ public class SignupActivity extends AppCompatActivity {
         if (!validateEmail() | !validatePassword() | !validateRePassword()) {
             return;
         } else {
-            loadingBar.setTitle("Đang tạo tài khoản");
-            loadingBar.setMessage("Đợi chút...");
+            loadingBar.setTitle("Creating account");
+            loadingBar.setMessage("Please wait...");
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
@@ -88,14 +97,11 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
                                 String currentUserId = firebaseAuth.getCurrentUser().getUid();
                                 databaseReference.child("Users").child(currentUserId).setValue("");
-                                Toast.makeText(SignupActivity.this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
-                                loadingBar.dismiss();
-                                Intent intent1 = new Intent(SignupActivity.this,MainActivity.class);
-                                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent1);
-                                finish();
+                                databaseReference.child("Users").child(currentUserId).child("device_token").setValue(deviceToken);
+                                SendEmailVerificationMessage();
                             } else {
                                 String message = task.getException().toString();
                                 Toast.makeText(SignupActivity.this, "Lỗi: " + message, Toast.LENGTH_SHORT).show();
@@ -103,6 +109,32 @@ public class SignupActivity extends AppCompatActivity {
                             }
                         }
                     });
+        }
+    }
+    private void SendEmailVerificationMessage(){
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                        builder.setTitle("Notification").setMessage("We have sent an email to you. Please check your email!");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                onBackPressed();
+                            }
+                        });
+                        builder.show();
+                        firebaseAuth.signOut();
+                    } else {
+                        String error = task.getException().getMessage();
+                        Toast.makeText(SignupActivity.this, "Error: " + error,Toast.LENGTH_SHORT).show();
+                        firebaseAuth.signOut();
+                    }
+                }
+            });
         }
     }
 

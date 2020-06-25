@@ -2,19 +2,21 @@ package com.example.chatappdemo.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chatappdemo.R;
 import com.example.chatappdemo.model.User;
@@ -26,14 +28,15 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity{
     int themeIdcurrent;
     String SHARED_PREFS = "codeTheme";
-    private ImageButton imgBtnBack;
+    private CircleImageView imgBtnBack;
+    private EditText txtSearch;
     private RecyclerView recycler_find_friend;
     private DatabaseReference userRef;
-    private Toolbar toolbar;
-    private ImageView imgNo_Search_Result;
+    private String stringSearch = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,27 +46,73 @@ public class SearchActivity extends AppCompatActivity {
         setTheme(themeIdcurrent);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        toolbar = findViewById(R.id.toolBar_Search);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
-
-        imgNo_Search_Result = findViewById(R.id.img_no_search_result);
+        imgBtnBack = findViewById(R.id.back_search);
+        imgBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+
+        txtSearch = findViewById(R.id.txt_search);
+        txtSearch.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (txtSearch.getRight() - txtSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        txtSearch.setText("");
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        txtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (txtSearch.getText().toString().equals("")) {
+                    Toast.makeText(SearchActivity.this,"Please write name to search",Toast.LENGTH_LONG).show();
+                } else {
+                    stringSearch = s.toString();
+                    onStart();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         recycler_find_friend = findViewById(R.id.recycler_find_friend);
         recycler_find_friend.setLayoutManager(new LinearLayoutManager(this));
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions<User> options =
-                new FirebaseRecyclerOptions.Builder<User>()
-                .setQuery(userRef, User.class)
-                .build();
+        FirebaseRecyclerOptions<User> options = null;
+        if (stringSearch.equals("")) {
+            options =
+                    new FirebaseRecyclerOptions.Builder<User>()
+                            .setQuery(userRef, User.class)
+                            .build();
+        } else {
+            options =
+                    new FirebaseRecyclerOptions.Builder<User>()
+                            .setQuery(userRef.orderByChild("name").startAt(stringSearch).endAt(stringSearch + "\uf8ff"), User.class)
+                            .build();
+        }
 
         FirebaseRecyclerAdapter<User, FindFriendViewHolder> adapter =
                 new FirebaseRecyclerAdapter<User, FindFriendViewHolder>(options) {
@@ -94,6 +143,8 @@ public class SearchActivity extends AppCompatActivity {
         recycler_find_friend.setAdapter(adapter);
         adapter.startListening();
     }
+
+
 
     public static class FindFriendViewHolder extends RecyclerView.ViewHolder {
         TextView tv_username;

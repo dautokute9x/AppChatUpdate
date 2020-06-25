@@ -19,8 +19,7 @@
             </de.hdodenhof.circleimageview.CircleImageView>
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_on_off_chat"
-                android:layout_gravity="right"
-                android:layout_marginTop="50dp"
+                android:layout_gravity="bottom|right"
                 android:visibility="invisible"
                 android:src="@drawable/online"
                 android:layout_width="15dp"

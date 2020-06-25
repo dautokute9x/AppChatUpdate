@@ -151,6 +151,32 @@
                 android:layout_width="250dp"
                 android:layout_height="1dp"/>
 
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/logo_facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_google"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/logo_google"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:src="@drawable/logo_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

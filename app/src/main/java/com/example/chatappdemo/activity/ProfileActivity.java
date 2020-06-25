@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -31,7 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageButton userProfileImageBG;
     private TextView userProfileName, userProfilePhone, userProfileStatus, userProfileSex, tv_Back;
     private Button btnSendMess, btnDeclineRequest;
-    private DatabaseReference userRef, requestRef, contactRef;
+    private DatabaseReference userRef, requestRef, contactRef,notificationRef;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -47,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         requestRef = FirebaseDatabase.getInstance().getReference().child("Requests");
         contactRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
+        notificationRef = FirebaseDatabase.getInstance().getReference().child("Notifications");
 
         receiverUserID = getIntent().getExtras().get("visit_userId").toString();
         sender_userId = firebaseAuth.getCurrentUser().getUid();
@@ -286,15 +289,32 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+
                             requestRef.child(receiverUserID).child(sender_userId)
                                     .child("request_type").setValue("received")
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                btnSendMess.setEnabled(true);
-                                                curent_state = "request_sent";
-                                                btnSendMess.setText("Cancel request");
+                                                HashMap<String, String> chatNotificationMap = new HashMap<>();
+                                                chatNotificationMap.put("from", sender_userId);
+                                                chatNotificationMap.put("type", "request");
+
+                                                notificationRef.child(receiverUserID).push()
+                                                        .setValue(chatNotificationMap)
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful()) {
+
+                                                                    btnSendMess.setEnabled(true);
+                                                                    curent_state = "request_sent";
+                                                                    btnSendMess.setText("Cancel request");
+                                                                }
+                                                            }
+                                                        });
+
+
                                             }
                                         }
                                     });
